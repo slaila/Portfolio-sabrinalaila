@@ -1,159 +1,94 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sabrina's Portfolio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
       --primary-blue: #2563eb;
       --light-blue: #93c5fd;
-      --dark-blue: #1e40af;
     }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background-color: white;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .hero {
-      background: linear-gradient(135deg, white 0%, var(--light-blue) 100%);
-    }
-
-    .project-card {
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .skill-bar {
-      height: 8px;
-      background-color: #e5e7eb;
-      border-radius: 4px;
-    }
-
-    .skill-progress {
-      height: 100%;
-      border-radius: 4px;
-      background-color: var(--primary-blue);
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .animate-fade-in {
-      animation: fadeIn 0.8s ease forwards;
-    }
-
-    @media (max-width: 768px) {
-      .hero-content {
-        flex-direction: column;
-      }
-
-      .hero-text {
-        margin-top: 2rem;
-      }
-    }
-
-    /* DARK MODE STYLING */
     body.dark {
-      background-color: #1a202c;
-      color: #f7fafc;
+      background-color: #1f2937;
+      color: white;
     }
 
-    body.dark nav {
-      background-color: #2d3748;
-    }
-
-    body.dark .hero {
-      background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-    }
-
-    body.dark .text-gray-800 {
-      color: #f7fafc !important;
-    }
-
-    body.dark .text-gray-700 {
-      color: #e2e8f0 !important;
-    }
-
-    body.dark .text-gray-600 {
-      color: #cbd5e0 !important;
-    }
-
-    body.dark .text-gray-500 {
-      color: #a0aec0 !important;
-    }
-
-    body.dark .text-blue-600 {
-      color: #63b3ed !important;
+    body.dark a {
+      color: white;
     }
 
     body.dark .bg-white {
-      background-color: #2d3748 !important;
+      background-color: #1f2937;
     }
 
-    body.dark .bg-gray-50 {
-      background-color: #1a202c !important;
+    body.dark .text-gray-700 {
+      color: white;
     }
 
-    body.dark .bg-blue-100 {
-      background-color: #2b6cb0 !important;
-    }
-
-    body.dark .border-gray-300 {
-      border-color: #4a5568 !important;
-    }
-
-    body.dark input,
-    body.dark textarea {
-      background-color: #2d3748;
-      color: #f7fafc;
+    body.dark .text-gray-800 {
+      color: white;
     }
   </style>
 </head>
-<body>
-  <!-- Navigation -->
+<body class="bg-white text-gray-800 transition-colors duration-300">
+
+  <!-- Navbar -->
   <nav class="bg-white shadow-sm sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-20 items-center">
         <a href="#home" class="flex items-center">
           <img src="https://res.cloudinary.com/dpxubzytn/image/upload/v1754575719/logopbi_b429qa.png" alt="Logo" class="h-10 w-auto" />
         </a>
-        <div class="hidden md:flex space-x-8">
-          <a href="#home" class="text-gray-700 hover:text-blue-600 transition">Home</a>
-          <a href="#about" class="text-gray-700 hover:text-blue-600 transition">About</a>
-          <a href="#projects" class="text-gray-700 hover:text-blue-600 transition">Projects</a>
-          <a href="#contact" class="text-gray-700 hover:text-blue-600 transition">Contact</a>
+        <div class="hidden md:flex space-x-8 text-gray-700 dark:text-gray-100">
+          <a href="#home" class="hover:text-blue-600 transition">Home</a>
+          <a href="#about" class="hover:text-blue-600 transition">About</a>
+          <a href="#projects" class="hover:text-blue-600 transition">Projects</a>
+          <a href="#contact" class="hover:text-blue-600 transition">Contact</a>
         </div>
-        <!-- Dark mode toggle -->
-        <button id="darkModeToggle" class="ml-4 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">
+        <!-- Dark Mode Toggle -->
+        <button id="darkModeToggle" class="ml-4 bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-100 px-3 py-1 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition">
           🌙
         </button>
-        <button class="md:hidden">
+        <!-- Mobile Menu Toggle -->
+        <button id="menuToggle" class="md:hidden ml-2">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16" />
           </svg>
         </button>
       </div>
     </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="md:hidden hidden px-4 pb-4 bg-white dark:bg-gray-800 shadow-md space-y-2 text-gray-700 dark:text-gray-100">
+      <a href="#home" class="block hover:text-blue-600 transition">Home</a>
+      <a href="#about" class="block hover:text-blue-600 transition">About</a>
+      <a href="#projects" class="block hover:text-blue-600 transition">Projects</a>
+      <a href="#contact" class="block hover:text-blue-600 transition">Contact</a>
+    </div>
   </nav>
-    <!-- Hero Section -->
+
+  <!-- Content Placeholder -->
+  <section id="home" class="h-screen flex items-center justify-center">
+    <h1 class="text-4xl font-bold">Welcome to My Portfolio</h1>
+  </section>
+  <section id="about" class="h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+    <h2 class="text-3xl font-semibold">About Me</h2>
+  </section>
+  <section id="projects" class="h-screen flex items-center justify-center">
+    <h2 class="text-3xl font-semibold">Projects</h2>
+  </section>
+  <section id="contact" class="h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900">
+    <h2 class="text-3xl font-semibold">Contact</h2>
+  </section>
+  <!-- Hero Section -->
     <section id="home" class="hero min-h-screen flex items-center">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 hero-content flex flex-wrap md:flex-nowrap items-center justify-between">
             <div class="hero-text md:w-1/2">
@@ -442,48 +377,32 @@
         </svg>
     </button>
 
-   <script>
-    // Toggle menu mobile (jika diperlukan)
-    const menuButton = document.querySelector('nav button');
-    const navLinks = document.querySelector('.hidden.md\\:flex.space-x-8');
-
-    if (menuButton && navLinks) {
-      menuButton.addEventListener('click', function () {
-        navLinks.classList.toggle('hidden');
-        navLinks.classList.toggle('flex');
-        navLinks.classList.toggle('flex-col');
-        navLinks.classList.toggle('absolute');
-        navLinks.classList.toggle('top-20');
-        navLinks.classList.toggle('left-0');
-        navLinks.classList.toggle('right-0');
-        navLinks.classList.toggle('bg-white');
-        navLinks.classList.toggle('p-4');
-        navLinks.classList.toggle('shadow-md');
-      });
-    }
-
-    // Toggle dark mode
+ <script>
+    // Dark mode toggle
     const darkModeToggle = document.getElementById('darkModeToggle');
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
-    // Set dark mode jika sebelumnya sudah disimpan
-    if (localStorage.getItem('dark-mode') === 'enabled') {
+    if (localStorage.getItem('dark-mode') === 'enabled' || 
+        (!localStorage.getItem('dark-mode') && prefersDarkScheme.matches)) {
       document.body.classList.add('dark');
+      darkModeToggle.textContent = '☀️';
     }
-
-    // Set ikon saat awal
-    darkModeToggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
 
     darkModeToggle.addEventListener('click', () => {
       document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      localStorage.setItem('dark-mode', isDark ? 'enabled' : 'disabled');
+      darkModeToggle.textContent = isDark ? '☀️' : '🌙';
+    });
 
-      if (document.body.classList.contains('dark')) {
-        localStorage.setItem('dark-mode', 'enabled');
-        darkModeToggle.textContent = '☀️';
-      } else {
-        localStorage.setItem('dark-mode', 'disabled');
-        darkModeToggle.textContent = '🌙';
-      }
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
     });
   </script>
+
 </body>
 </html>
