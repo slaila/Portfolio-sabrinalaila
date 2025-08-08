@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
-<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,57 +11,89 @@
             --light-blue: #93c5fd;
             --dark-blue: #1e40af;
         }
-        
+
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: #333;
             background-color: white;
         }
-        
+
         .hero {
             background: linear-gradient(135deg, white 0%, var(--light-blue) 100%);
         }
-        
+
         .project-card {
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        
+
         .project-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
         .skill-bar {
             height: 8px;
             background-color: #e5e7eb;
             border-radius: 4px;
         }
-        
+
         .skill-progress {
             height: 100%;
             border-radius: 4px;
             background-color: var(--primary-blue);
         }
-        
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         .animate-fade-in {
             animation: fadeIn 0.8s ease forwards;
         }
-        
+
         @media (max-width: 768px) {
             .hero-content {
                 flex-direction: column;
             }
-            
+
             .hero-text {
                 margin-top: 2rem;
             }
+        }
+
+        /* DARK MODE STYLING */
+        body.dark {
+            background-color: #1a202c;
+            color: #f7fafc;
+        }
+
+        body.dark nav {
+            background-color: #2d3748;
+        }
+
+        body.dark .hero {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+        }
+
+        body.dark .text-gray-800 { color: #f7fafc !important; }
+        body.dark .text-gray-700 { color: #e2e8f0 !important; }
+        body.dark .text-gray-600 { color: #cbd5e0 !important; }
+        body.dark .text-gray-500 { color: #a0aec0 !important; }
+        body.dark .text-blue-600 { color: #63b3ed !important; }
+
+        body.dark .bg-white { background-color: #2d3748 !important; }
+        body.dark .bg-gray-50 { background-color: #1a202c !important; }
+        body.dark .bg-blue-100 { background-color: #2b6cb0 !important; }
+
+        body.dark .border-gray-300 { border-color: #4a5568 !important; }
+
+        body.dark input,
+        body.dark textarea {
+            background-color: #2d3748;
+            color: #f7fafc;
         }
     </style>
 </head>
@@ -80,6 +111,10 @@
                     <a href="#projects" class="text-gray-700 hover:text-blue-600 transition">Projects</a>
                     <a href="#contact" class="text-gray-700 hover:text-blue-600 transition">Contact</a>
                 </div>
+                <!-- Toggle Button for Dark Mode -->
+                <button id="darkModeToggle" class="ml-4 bg-gray-200 text-gray-800 px-3 py-1 rounded hover:bg-gray-300 transition">
+                    🌙
+                </button>
                 <button class="md:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -188,8 +223,8 @@
                 <h3 class="text-2xl font-semibold text-gray-800 mb-4">Education</h3>
                 <div class="space-y-6">
                     <div class="bg-white shadow-md rounded-lg p-6">
-                        <h4 class="font-semibold text-gray-700">Bachelor of Science in Computer Science</h4>
-                        <p class="text-gray-600">University of XYZ, 2020 - 2024</p>
+                        <h4 class="font-semibold text-gray-700">Bachelor of Computer Science</h4>
+                        <p class="text-gray-600">Mercu Buana University, 2023 - 2027</p>
                         <p class="text-gray-500 mt-2">Focused on software development, algorithms, and data structures.</p>
                     </div>
                 </div>
@@ -378,14 +413,13 @@
         </svg>
     </button>
 
-    <script>
-        // Mobile menu toggle functionality
+  <script>
         // Mobile menu toggle
         const menuButton = document.querySelector('nav button');
         const navLinks = document.querySelector('.hidden.md\\:flex.space-x-8');
-        
+
         if (menuButton && navLinks) {
-            menuButton.addEventListener('click', function() {
+            menuButton.addEventListener('click', function () {
                 navLinks.classList.toggle('hidden');
                 navLinks.classList.toggle('flex');
                 navLinks.classList.toggle('flex-col');
@@ -401,24 +435,24 @@
 
         // Back to top button
         const backToTopButton = document.getElementById('backToTop');
-        
-        window.addEventListener('scroll', function() {
+
+        window.addEventListener('scroll', function () {
             if (window.pageYOffset > 300) {
                 backToTopButton.classList.remove('hidden');
             } else {
                 backToTopButton.classList.add('hidden');
             }
         });
-        
-        backToTopButton.addEventListener('click', function() {
-            window.scrollTo({top: 0, behavior: 'smooth'});
+
+        backToTopButton.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                
+
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
@@ -426,27 +460,38 @@
         });
 
         // Form submission
-        document.querySelector('form').addEventListener('submit', function(e) {
+        document.querySelector('form').addEventListener('submit', function (e) {
             e.preventDefault();
             alert('Thank you for your message! I will get back to you soon.');
             this.reset();
         });
 
+        // Toggle dark mode
         const darkModeToggle = document.getElementById('darkModeToggle');
-    // Check for saved user preference, if any, and apply it
-    if (localStorage.getItem('dark-mode') === 'enabled') {
-        document.body.classList.add('dark');
-    }
-    darkModeToggle.addEventListener('click', () => {
-        // Toggle dark mode class on body
-        document.body.classList.toggle('dark');
-        // Save user preference in local storage
-        if (document.body.classList.contains('dark')) {
-            localStorage.setItem('dark-mode', 'enabled');
-        } else {
-            localStorage.setItem('dark-mode', 'disabled');
+
+        // Cek preferensi pengguna dan terapkan
+        if (localStorage.getItem('dark-mode') === 'enabled') {
+            document.body.classList.add('dark');
         }
-    });
+
+        // Ubah ikon sesuai mode saat load
+        if (document.body.classList.contains('dark')) {
+            darkModeToggle.textContent = '☀️';
+        } else {
+            darkModeToggle.textContent = '🌙';
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+
+            if (document.body.classList.contains('dark')) {
+                localStorage.setItem('dark-mode', 'enabled');
+                darkModeToggle.textContent = '☀️';
+            } else {
+                localStorage.setItem('dark-mode', 'disabled');
+                darkModeToggle.textContent = '🌙';
+            }
+        });
     </script>
 </body>
 </html>
