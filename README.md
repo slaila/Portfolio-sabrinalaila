@@ -24,7 +24,7 @@ Ini adalah website portfolio pribadi saya, **Sabrina Laila Mutiara**, seorang Ju
 |----------------|------------------------------------|
 | HTML5          | Struktur halaman                   |
 | Tailwind CSS   | Styling responsif dan modern       |
-| JavaScript     | Interaktivitas (form, dark mode)   |
+| JavaScript     | Interaktivitas                     |
 | Cloudinary     | Hosting gambar                     |
 | Font: Inter    | Font utama                         |
 
