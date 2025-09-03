@@ -188,17 +188,29 @@
                     <a href="#projects" class="text-gray-300 hover:text-blue-400 transition duration-300">Projects</a>
                     <a href="#contact" class="text-gray-300 hover:text-blue-400 transition duration-300">Contact</a>
                 </div>
-                <!-- Mobile menu button -->
-                <button class="md:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6 text-gray-300">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <!-- Mobile button -->
+                <button id="menu-btn" class="md:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
+                        viewBox="0 0 24 24" stroke="currentColor" 
+                        class="h-6 w-6 text-gray-300">
+                    <path stroke-linecap="round" stroke-linejoin="round" 
+                            stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
                 </button>
+            </div>
+
+                <!-- Menu (Mobile) -->
+                <div id="mobile-menu" class="hidden md:hidden flex-col space-y-2 pb-4">
+                <a href="#home" class="block text-gray-300 hover:text-blue-400 transition">Home</a>
+                <a href="#about" class="block text-gray-300 hover:text-blue-400 transition">About</a>
+                <a href="#projects" class="block text-gray-300 hover:text-blue-400 transition">Projects</a>
+                <a href="#contact" class="block text-gray-300 hover:text-blue-400 transition">Contact</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section id="home" class="hero min-h-screen flex items-center py-20 md:py-0">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-12">
             <div class="md:w-1/2 text-center md:text-left animated-section-element">
@@ -221,8 +233,7 @@
                     loading="lazy" 
                     class="w-full h-full object-cover"/>
             </div>
-
-            <!-- Kotak available work -->
+            
             <div class="absolute bottom-0 right-0 bg-gray-800 p-3 rounded-xl shadow-md transform transition-transform duration-300 hover:scale-110 z-10">
                 <div class="flex items-center space-x-2">
                     <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
@@ -232,7 +243,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About-->
     <section id="about" class="py-20 bg-gray-900">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-center text-gray-100 mb-16 animated-section-element">About <span class="text-blue-400">Me</span></h2>
@@ -279,7 +290,7 @@
                     </div>
                 </div>
             </div>
-            <!-- Education Section -->
+            
             <div class="mt-12 animated-section-element" style="animation-delay: 0.6s;">
                 <h3 class="text-2xl font-semibold text-gray-100 mb-4">Education</h3>
                 <div class="space-y-6">
@@ -293,7 +304,7 @@
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- Projects-->
     <section id="projects" class="py-20 bg-gray-800">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-center text-gray-100 mb-4 animated-section-element">
@@ -304,7 +315,7 @@
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1: CitaUsaha Chatbot -->
+                
                 <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg animated-section-element" data-project-id="1">
                     <div class="h-48 overflow-hidden">
                         <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756875423/Sabrina_s_Portfolio_1_qdhaop.png" alt="CitaUsaha Chatbot project screenshot" loading="lazy" class="w-full h-full object-cover transition duration-300 transform hover:scale-105" />
@@ -319,7 +330,6 @@
                     </div>
                 </div>
 
-                <!-- Project 2: CoreMates Apps -->
                 <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg animated-section-element" data-project-id="2">
                     <div class="h-48 overflow-hidden">
                         <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756874987/Sabrina_s_Portfolio_v0edcm.png" alt="CoreMates App project screenshot" loading="lazy" class="w-full h-full object-cover transition duration-300 transform hover:scale-105" />
@@ -334,7 +344,6 @@
                     </div>
                 </div>
 
-                <!-- Project 3: TrackIt Apps -->
                 <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg animated-section-element" data-project-id="3">
                     <div class="h-48 overflow-hidden">
                         <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756875268/trackit_r6fm60.png" alt="TrackIt App project screenshot" loading="lazy" class="w-full h-full object-cover transition duration-300 transform hover:scale-105" />
@@ -350,7 +359,6 @@
                     </div>
                 </div>
 
-                <!-- Project 4: Nonlinear Equation App -->
                 <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg animated-section-element" data-project-id="4">
                     <div class="h-48 overflow-hidden">
                         <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756876104/Screenshot_2025-09-03_120742_hdvvjb.png" alt="Nonlinear Equation App project screenshot" loading="lazy" class="w-full h-full object-cover transition duration-300 transform hover:scale-105" />
@@ -365,7 +373,6 @@
                     </div>
                 </div>
 
-                <!-- Project 5: Algorithm Scheduling -->
                 <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg animated-section-element" data-project-id="5">
                     <div class="h-48 overflow-hidden">
                         <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756876145/Screenshot_2025-09-03_120854_ecanmn.png" alt="Greedy & Dynamic Programming Scheduling project screenshot" loading="lazy" class="w-full h-full object-cover transition duration-300 transform hover:scale-105" />
@@ -383,7 +390,7 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact -->
     <section id="contact" class="py-20 bg-gray-900">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-center text-gray-100 mb-16 animated-section-element">Get In <span class="text-blue-400">Touch</span></h2>
@@ -479,14 +486,14 @@
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
+    
     <button id="backToTop" class="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 hidden transform hover:scale-110">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
         </svg>
     </button>
 
-    <!-- Modal for form success message -->
+    <!-- Modal success message -->
     <div id="successModal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
@@ -542,6 +549,12 @@
 </script>
 
     <script>
+    const btn = document.getElementById("menu-btn");
+  const menu = document.getElementById("mobile-menu");
+
+  btn.addEventListener("click", () => {
+    menu.classList.toggle("hidden");
+  });
     const projectsData = {
         1: {
             title: "CitaUsaha Chatbot",
@@ -571,7 +584,7 @@
     };
 
     document.addEventListener('DOMContentLoaded', () => {
-        // Smooth scroll for navigation links
+        
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -597,7 +610,7 @@
             });
         });
 
-        // Intersection Observer for scroll animations
+        
         const animatedElements = document.querySelectorAll('.animated-section-element');
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -641,7 +654,7 @@
             skillObserver.observe(bar);
         });
 
-        // Contact form submission with modal
+        
         const form = document.getElementById('contact-form');
         const successModal = document.getElementById('successModal');
         const projectModal = document.getElementById('projectModal');
@@ -669,8 +682,6 @@
             }
         });
 
-        // --- NEW / MODIFIED CODE BELOW THIS LINE ---
-
         // Function to handle project modal display
         function showProjectModal(projectId) {
             const project = projectsData[projectId];
@@ -685,9 +696,9 @@
         // Event listener for project cards
         document.querySelectorAll('.project-card').forEach(card => {
             card.addEventListener('click', function(e) {
-                // Check if the click originated from the 'View Details' link
+                
                 if (e.target.closest('.project-link')) {
-                    return; // Do nothing, the link's listener will handle it
+                    return; 
                 }
                 const projectId = this.getAttribute('data-project-id');
                 showProjectModal(projectId);
