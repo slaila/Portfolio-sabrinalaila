@@ -547,154 +547,168 @@
 </script>
 
     <script>
-        const projectsData = {
-            1: {
-                title: "CitaUsaha Chatbot",
-                description: "An educational chatbot on the Smojo AI platform for aspiring entrepreneurs. Selected as Top 7 out of 150 projects in a national Innovation Chatbot Competition.",
-                link: "https://www.canva.com/design/DAGX8Q-VW2Q/m_pm47UAIRB30_nesJeOPg/view?utm_content=DAGX8Q-VW2Q&utm_campaign=designshare&utm_medium=link&utm_source=editor"
-            },
-            2: {
-                title: "CoreMates Apps",
-                description: "Collaboration platform for university students to find teammates for competitions and projects. I worked as both Project Manager and UI/UX Designer.",
-                link: "https://www.figma.com/proto/B2V3yVrpggjnj6k2wOfuwI/CoreMates?node-id=32-2304&p=f&t=nOw8KGFozd2yB1FE-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=32%3A2304"
-            },
-            3: {
-                title: "TrackIt Apps",
-                description: "Mobile application for daily financial management. Features include income/expense tracking, savings goals, and data visualization.",
-                link: "https://github.com/slaila/TrackItApps/"
-            },
-            4: {
-                title: "Nonlinear Equation App",
-                description: "Web application for solving nonlinear equations using Newton-Raphson method, built with React.js. Published in Collabits Journal.",
-                link: "https://www.researchgate.net/publication/390835864_NR_Solver_An_Interactive_Web-Based_Tool_for_Visualizing_and_Solving_Nonlinear_Equations_Through_Numerical_Analysis_Using_the_Newton-Raphson_Algorithm"
-            },
-            5: {
-                title: "Scheduling Optimization",
-                description: "Research project implementing Greedy and Dynamic Programming for interval scheduling with Knapsack model. Published in FORMAT Journal.",
-                link: "https://www.researchgate.net/publication/386425473_Implementasi_Algoritma_Greedy_dan_Dynamic_Programming_untuk_Masalah_Penjadwalan_Interval_dengan_Model_Knapsack"
-            }
-        };
+    const projectsData = {
+        1: {
+            title: "CitaUsaha Chatbot",
+            description: "An educational chatbot on the Smojo AI platform for aspiring entrepreneurs. Selected as Top 7 out of 150 projects in a national Innovation Chatbot Competition.",
+            link: "https://www.canva.com/design/DAGX8Q-VW2Q/m_pm47UAIRB30_nesJeOPg/view?utm_content=DAGX8Q-VW2Q&utm_campaign=designshare&utm_medium=link&utm_source=editor"
+        },
+        2: {
+            title: "CoreMates Apps",
+            description: "Collaboration platform for university students to find teammates for competitions and projects. I worked as both Project Manager and UI/UX Designer.",
+            link: "https://www.figma.com/proto/B2V3yVrpggjnj6k2wOfuwI/CoreMates?node-id=32-2304&p=f&t=nOw8KGFozd2yB1FE-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=32%3A2304"
+        },
+        3: {
+            title: "TrackIt Apps",
+            description: "Mobile application for daily financial management. Features include income/expense tracking, savings goals, and data visualization.",
+            link: "https://github.com/slaila/TrackItApps/"
+        },
+        4: {
+            title: "Nonlinear Equation App",
+            description: "Web application for solving nonlinear equations using Newton-Raphson method, built with React.js. Published in Collabits Journal.",
+            link: "https://www.researchgate.net/publication/390835864_NR_Solver_An_Interactive_Web-Based_Tool_for_Visualizing_and_Solving_Nonlinear_Equations_Through_Numerical_Analysis_Using_the_Newton-Raphson_Algorithm"
+        },
+        5: {
+            title: "Scheduling Optimization",
+            description: "Research project implementing Greedy and Dynamic Programming for interval scheduling with Knapsack model. Published in FORMAT Journal.",
+            link: "https://www.researchgate.net/publication/386425473_Implementasi_Algoritma_Greedy_dan_Dynamic_Programming_untuk_Masalah_Penjadwalan_Interval_dengan_Model_Knapsack"
+        }
+    };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Smooth scroll for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-
-            // Back to Top button logic
-            const backToTopButton = document.getElementById('backToTop');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) {
-                    backToTopButton.classList.remove('hidden');
-                } else {
-                    backToTopButton.classList.add('hidden');
-                }
-            });
-            backToTopButton.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-
-            // Intersection Observer for scroll animations
-            const animatedElements = document.querySelectorAll('.animated-section-element');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.2 });
-
-            animatedElements.forEach(el => {
-                observer.observe(el);
-            });
-
-            // Skill bar animation
-            const skillObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const progress = entry.target;
-                        const width = progress.getAttribute('data-width');
-                        progress.style.width = width;
-                        
-                        const percentElement = progress.parentElement.previousElementSibling.querySelector('.skill-percent');
-                        let count = 0;
-                        const target = parseInt(percentElement.getAttribute('data-percent'));
-                        const counter = setInterval(() => {
-                            if (count >= target) {
-                                clearInterval(counter);
-                                return;
-                            }
-                            count++;
-                            percentElement.textContent = count + '%';
-                        }, 20);
-                        
-                        skillObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.8 });
-
-            document.querySelectorAll('.skill-progress').forEach(bar => {
-                skillObserver.observe(bar);
-            });
-
-            // Contact form submission with modal
-            const form = document.getElementById('contact-form');
-            const successModal = document.getElementById('successModal');
-            const projectModal = document.getElementById('projectModal');
-            const closeButtons = document.querySelectorAll('.close-button');
-
-            form.addEventListener('submit', function(e) {
+    document.addEventListener('DOMContentLoaded', () => {
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                successModal.style.display = 'flex';
-                form.reset();
-            });
-
-            closeButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    successModal.style.display = 'none';
-                    projectModal.style.display = 'none';
-                });
-            });
-
-            window.addEventListener('click', (e) => {
-                if (e.target === successModal) {
-                    successModal.style.display = 'none';
-                }
-                if (e.target === projectModal) {
-                    projectModal.style.display = 'none';
-                }
-            });
-
-            // Project modal functionality
-            document.querySelectorAll('.project-card').forEach(card => {
-                card.addEventListener('click', function(e) {
-                    // Check if the click originated from the link itself
-                    if (e.target.closest('.project-link')) {
-                        return;
-                    }
-                    const projectId = this.getAttribute('data-project-id');
-                    const project = projectsData[projectId];
-
-                    document.getElementById('project-title').textContent = project.title;
-                    document.getElementById('project-description').textContent = project.description;
-                    document.getElementById('project-link').href = project.link;
-                    
-                    projectModal.style.display = 'flex';
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
             });
         });
 
-        
-    </script>
+        // Back to Top button logic
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.classList.remove('hidden');
+            } else {
+                backToTopButton.classList.add('hidden');
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const animatedElements = document.querySelectorAll('.animated-section-element');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // Skill bar animation
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progress = entry.target;
+                    const width = progress.getAttribute('data-width');
+                    progress.style.width = width;
+                    
+                    const percentElement = progress.parentElement.previousElementSibling.querySelector('.skill-percent');
+                    let count = 0;
+                    const target = parseInt(percentElement.getAttribute('data-percent'));
+                    const counter = setInterval(() => {
+                        if (count >= target) {
+                            clearInterval(counter);
+                            return;
+                        }
+                        count++;
+                        percentElement.textContent = count + '%';
+                    }, 20);
+                    
+                    skillObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.8 });
+
+        document.querySelectorAll('.skill-progress').forEach(bar => {
+            skillObserver.observe(bar);
+        });
+
+        // Contact form submission with modal
+        const form = document.getElementById('contact-form');
+        const successModal = document.getElementById('successModal');
+        const projectModal = document.getElementById('projectModal');
+        const closeButtons = document.querySelectorAll('.close-button');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            successModal.style.display = 'flex';
+            form.reset();
+        });
+
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                successModal.style.display = 'none';
+                projectModal.style.display = 'none';
+            });
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === successModal) {
+                successModal.style.display = 'none';
+            }
+            if (e.target === projectModal) {
+                projectModal.style.display = 'none';
+            }
+        });
+
+        // --- NEW / MODIFIED CODE BELOW THIS LINE ---
+
+        // Function to handle project modal display
+        function showProjectModal(projectId) {
+            const project = projectsData[projectId];
+            if (project) {
+                document.getElementById('project-title').textContent = project.title;
+                document.getElementById('project-description').textContent = project.description;
+                document.getElementById('project-link').href = project.link;
+                projectModal.style.display = 'flex';
+            }
+        }
+
+        // Event listener for project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Check if the click originated from the 'View Details' link
+                if (e.target.closest('.project-link')) {
+                    return; // Do nothing, the link's listener will handle it
+                }
+                const projectId = this.getAttribute('data-project-id');
+                showProjectModal(projectId);
+            });
+        });
+
+        // Event listener for project links (View Details)
+        document.querySelectorAll('.project-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevents the link from navigating away
+                const projectId = this.getAttribute('data-project-id');
+                showProjectModal(projectId);
+            });
+        });
+    });
+  </script>
     
 
 </body>
