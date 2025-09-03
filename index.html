@@ -316,7 +316,6 @@
                             <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">AI</span>
                             <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Project Leader</span>
                         </div>
-                        <a href="#" class="text-blue-400 hover:text-blue-200 font-medium transition duration-300 project-link" data-project-id="1">View Details →</a>
                     </div>
                 </div>
 
@@ -332,7 +331,6 @@
                             <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">UI/UX</span>
                             <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Project Management</span>
                         </div>
-                        <a href="#" class="text-blue-400 hover:text-blue-200 font-medium transition duration-300 project-link" data-project-id="2">View Details →</a>
                     </div>
                 </div>
 
@@ -349,7 +347,6 @@
                             <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">FlutterFlow</span>
                             <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Finance</span>
                         </div>
-                        <a href="#" class="text-blue-400 hover:text-blue-200 font-medium transition duration-300 project-link" data-project-id="3">View Details →</a>
                     </div>
                 </div>
 
@@ -365,7 +362,6 @@
                             <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Numerical Method</span>
                             <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
                         </div>
-                        <a href="#" class="text-blue-400 hover:text-blue-200 font-medium transition duration-300 project-link" data-project-id="4">View Details →</a>
                     </div>
                 </div>
 
@@ -381,7 +377,6 @@
                             <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Dynamic Programming</span>
                             <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
                         </div>
-                        <a href="#" class="text-blue-400 hover:text-blue-200 font-medium transition duration-300 project-link" data-project-id="5">View Details →</a>
                     </div>
                 </div>
             </div>
@@ -694,15 +689,6 @@
                 if (e.target.closest('.project-link')) {
                     return; // Do nothing, the link's listener will handle it
                 }
-                const projectId = this.getAttribute('data-project-id');
-                showProjectModal(projectId);
-            });
-        });
-
-        // Event listener for project links (View Details)
-        document.querySelectorAll('.project-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault(); // Prevents the link from navigating away
                 const projectId = this.getAttribute('data-project-id');
                 showProjectModal(projectId);
             });
