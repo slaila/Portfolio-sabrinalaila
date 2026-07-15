@@ -7,23 +7,48 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-blue: #60a5fa;
-            --light-blue: #1f2937;
-            --dark-blue: #3b82f6;
+            --primary-blue: #0025ab;
+            --light-blue: #1a1a2e;
+            --dark-blue: #001a80;
             --text-color: #d1d5db;
-            --bg-color: #111827;
-            --card-bg: #1f2937;
+            --bg-color: #0d0d1a;
+            --card-bg: #141428;
+            --section-bg: #1a1a2e;
+            --nav-bg: rgba(13, 13, 26, 0.7);
+            --border-color: rgba(0, 37, 171, 0.3);
+            --text-heading: #f3f4f6;
+            --text-secondary: #9ca3af;
+            --skill-bar-bg: #2a2a45;
+            --scrollbar-track: #1a1a2e;
+            --img-bg: #1a1a2e;
+        }
+
+        [data-theme="light"] {
+            --primary-blue: #0025ab;
+            --light-blue: #e8eeff;
+            --dark-blue: #001a80;
+            --text-color: #1a1a2e;
+            --bg-color: #eef2ff;
+            --card-bg: #dce4ff;
+            --section-bg: #e2e8ff;
+            --nav-bg: rgba(220, 228, 255, 0.8);
+            --border-color: rgba(0, 37, 171, 0.2);
+            --text-heading: #0d0d1a;
+            --text-secondary: #3a3a5c;
+            --skill-bar-bg: #c7d2fe;
+            --scrollbar-track: #c7d2fe;
+            --img-bg: #c7d2fe;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             color: var(--text-color);
             background-color: var(--bg-color);
             line-height: 1.6;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         html {
@@ -33,15 +58,99 @@
         /* Custom scrollbar for a cleaner look */
         ::-webkit-scrollbar {
             width: 8px;
+            height: 8px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #374151;
+            background: var(--scrollbar-track);
         }
 
         ::-webkit-scrollbar-thumb {
             background: var(--primary-blue);
             border-radius: 4px;
+        }
+
+        .projects-scroll {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .projects-row-wrapper {
+            position: relative;
+            padding: 0 50px;
+        }
+
+        .projects-row {
+            display: flex;
+            gap: 1.5rem;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        .projects-row .project-card {
+            min-width: 300px;
+            flex-shrink: 0;
+        }
+
+        .projects-row-left {
+            animation: scrollLeft 20s linear infinite;
+        }
+
+        .projects-row-right {
+            animation: scrollRight 20s linear infinite;
+        }
+
+        .projects-row:hover {
+            animation-play-state: paused;
+        }
+
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .scroll-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3);
+        }
+
+        .scroll-btn-left {
+            left: 0;
+        }
+
+        .scroll-btn-right {
+            right: 0;
+        }
+
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes scrollRight {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        .projects-scroll > * {
+            scroll-snap-align: start;
         }
 
         /* Hero Section Animation */
@@ -102,6 +211,14 @@
             cursor: pointer;
         }
 
+        [data-theme="light"] .project-card {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="light"] .project-card:hover {
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.12);
+        }
+
         .project-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
@@ -109,7 +226,7 @@
 
         /* Skill bar animation */
         .skill-bar {
-            background-color: #4b5563;
+            background-color: var(--skill-bar-bg);
             border-radius: 9999px;
             height: 8px;
             overflow: hidden;
@@ -117,7 +234,7 @@
         }
 
         .skill-progress {
-            background-color: var(--primary-blue);
+            background: var(--primary-blue);
             height: 100%;
             border-radius: 9999px;
             width: 0;
@@ -151,6 +268,47 @@
             animation: modalFadeIn 0.3s ease-in-out;
         }
 
+        [data-theme="light"] .modal-content {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 8px;
+            left: 24px;
+            z-index: 50;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3);
+        }
+
+        [data-theme="light"] .theme-toggle {
+            background: rgba(0, 37, 171, 0.1);
+            border: 1px solid rgba(0, 37, 171, 0.2);
+        }
+
+        [data-theme="light"] .theme-toggle:hover {
+            background: rgba(0, 37, 171, 0.2);
+            border-color: rgba(0, 37, 171, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 37, 171, 0.2);
+        }
+
         @keyframes modalFadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -171,11 +329,134 @@
             color: #d1d5db;
             text-decoration: none;
         }
+
+        /* Light mode overrides for Tailwind classes */
+        [data-theme="light"] body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        [data-theme="light"] .bg-gray-900,
+        [data-theme="light"] .bg-gray-800 {
+            background-color: var(--card-bg) !important;
+        }
+
+        [data-theme="light"] section.bg-gray-800 {
+            background-color: var(--section-bg) !important;
+        }
+
+        [data-theme="light"] section.bg-gray-900 {
+            background-color: var(--bg-color) !important;
+        }
+
+        [data-theme="light"] .text-gray-100,
+        [data-theme="light"] .text-gray-200 {
+            color: var(--text-heading) !important;
+        }
+
+        [data-theme="light"] .text-gray-300,
+        [data-theme="light"] .text-gray-400 {
+            color: var(--text-secondary) !important;
+        }
+
+        [data-theme="light"] .text-gray-500 {
+            color: #6b7280 !important;
+        }
+
+        [data-theme="light"] .text-blue-400 {
+            color: var(--primary-blue) !important;
+        }
+
+        [data-theme="light"] .text-blue-300 {
+            color: #0025ab !important;
+        }
+
+        [data-theme="light"] .bg-blue-900 {
+            background-color: #c7d2fe !important;
+        }
+
+        [data-theme="light"] .bg-blue-600 {
+            background-color: #0025ab !important;
+        }
+
+        [data-theme="light"] .border-blue-400 {
+            border-color: #0025ab !important;
+        }
+
+        [data-theme="light"] .hover\:bg-blue-800:hover {
+            background-color: rgba(0, 37, 171, 0.15) !important;
+        }
+
+        [data-theme="light"] .bg-gray-700 {
+            background-color: var(--img-bg) !important;
+        }
+
+        [data-theme="light"] .border-blue-400 {
+            border-color: var(--primary-blue) !important;
+        }
+
+        [data-theme="light"] .hero {
+            background: linear-gradient(135deg, var(--bg-color) 0%, var(--light-blue) 100%) !important;
+        }
+
+        [data-theme="light"] nav {
+            background: var(--nav-bg) !important;
+            border-bottom-color: var(--border-color) !important;
+        }
+
+        [data-theme="light"] #mobile-sidebar {
+            background: rgba(220, 228, 255, 0.95) !important;
+            border-left-color: var(--border-color) !important;
+        }
+
+        [data-theme="light"] #mobile-sidebar a {
+            color: #1a1a2e !important;
+        }
+
+        [data-theme="light"] #mobile-sidebar a:hover {
+            color: #0025ab !important;
+        }
+
+        [data-theme="light"] .scroll-btn {
+            background: rgba(0, 37, 171, 0.1);
+            border-color: rgba(0, 37, 171, 0.2);
+            color: #0025ab;
+        }
+
+        [data-theme="light"] .scroll-btn:hover {
+            background: rgba(0, 37, 171, 0.2);
+            border-color: rgba(0, 37, 171, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 37, 171, 0.2);
+        }
+
+        [data-theme="light"] #backToTop {
+            background: rgba(0, 37, 171, 0.1) !important;
+            border-color: rgba(0, 37, 171, 0.2) !important;
+            color: #0025ab !important;
+        }
+
+        [data-theme="light"] footer {
+            background-color: var(--section-bg) !important;
+            color: var(--text-color) !important;
+        }
+
+
+        [data-theme="light"] input,
+        [data-theme="light"] textarea {
+            background-color: #dce4ff !important;
+            border-color: #a5b4fc !important;
+            color: #1a1a2e !important;
+        }
+
+        [data-theme="light"] input::placeholder,
+        [data-theme="light"] textarea::placeholder {
+            color: #6b7280 !important;
+        }
     </style>
 </head>
 <body class="bg-gray-900">
     <!-- Navigation -->
-    <nav class="bg-gray-800 shadow-sm sticky top-0 z-50 rounded-b-xl transition duration-300">
+    <nav class="sticky top-0 z-50 rounded-b-xl transition duration-300" style="background: rgba(13, 13, 26, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 37, 171, 0.3);">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
                 <a href="#home" class="flex items-center space-x-2 text-xl font-bold text-gray-100">
@@ -199,16 +480,27 @@
                 </button>
             </div>
 
-                <!-- Menu (Mobile) -->
-                <div id="mobile-menu" class="hidden md:hidden flex-col space-y-2 pb-4">
-                <a href="#home" class="block text-gray-300 hover:text-blue-400 transition">Home</a>
-                <a href="#about" class="block text-gray-300 hover:text-blue-400 transition">About</a>
-                <a href="#projects" class="block text-gray-300 hover:text-blue-400 transition">Projects</a>
-                <a href="#contact" class="block text-gray-300 hover:text-blue-400 transition">Contact</a>
-                </div>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Sidebar -->
+    <div id="mobile-overlay" class="fixed inset-0 bg-black/50 z-[60] hidden" onclick="closeMobileMenu()"></div>
+    <div id="mobile-sidebar" class="fixed top-0 right-0 h-full w-64 z-[70] transform translate-x-full transition-transform duration-300" style="background: rgba(31, 41, 55, 0.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-left: 1px solid rgba(255, 255, 255, 0.1);">
+        <div class="flex justify-end p-6">
+            <button onclick="closeMobileMenu()" class="text-gray-300 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+        <div class="flex flex-col space-y-6 px-6">
+            <a href="#home" onclick="closeMobileMenu()" class="text-gray-200 hover:text-blue-400 transition text-lg">Home</a>
+            <a href="#about" onclick="closeMobileMenu()" class="text-gray-200 hover:text-blue-400 transition text-lg">About</a>
+            <a href="#projects" onclick="closeMobileMenu()" class="text-gray-200 hover:text-blue-400 transition text-lg">Projects</a>
+            <a href="#contact" onclick="closeMobileMenu()" class="text-gray-200 hover:text-blue-400 transition text-lg">Contact</a>
+        </div>
+    </div>
 
     <!-- Hero -->
     <section id="home" class="hero min-h-screen flex items-center py-20 md:py-0">
@@ -253,7 +545,7 @@
                     <p class="text-gray-400 mb-6">👋 Hello! I'm a passionate project manager with experience in leading teams and delivering impactful projects 🎯 I specialize in organizing workflows, ensuring collaboration, and driving results that create real value 🚀</p>
                     <p class="text-gray-400 mb-8">🔍 With attention to detail and a strong commitment to growth, I focus on clear communication 📢, efficient execution, and continuous improvement to achieve successful project outcomes ✨</p>
                     <div class="flex space-x-4">
-                        <a href="https://drive.google.com/file/d/1Pdh-X7T5wq4Kr7Op_NCLBSqdF39Pv7r3/view?usp=sharing" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300 transform hover:scale-105">See CV</a>
+                        <a href="cv-viewer.html" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300 transform hover:scale-105">See CV</a>
                         <a href="#contact" class="border border-blue-400 text-blue-400 hover:bg-blue-800 px-6 py-2 rounded-lg transition duration-300 transform hover:scale-105">Hire Me</a>
                     </div>
                 </div>
@@ -271,20 +563,20 @@
                         </div>
                         <div>
                             <div class="flex justify-between mb-2">
-                                <span class="font-medium text-gray-300">UI/UX Design</span>
+                                <span class="font-medium text-gray-300">Data Analysis</span>
                                 <span class="text-gray-400 skill-percent" data-percent="85">0%</span>
                             </div>
                             <div class="skill-bar">
-                                <div class="skill-progress" id="skill2" data-width="85%"></div>
+                                <div class="skill-progress" id="skill3" data-width="85%"></div>
                             </div>
                         </div>
                         <div>
                             <div class="flex justify-between mb-2">
-                                <span class="font-medium text-gray-300">Data Analysis</span>
-                                <span class="text-gray-400 skill-percent" data-percent="75">0%</span>
+                                <span class="font-medium text-gray-300">UI/UX Design</span>
+                                <span class="text-gray-400 skill-percent" data-percent="80">0%</span>
                             </div>
                             <div class="skill-bar">
-                                <div class="skill-progress" id="skill3" data-width="75%"></div>
+                                <div class="skill-progress" id="skill2" data-width="80%"></div>
                             </div>
                         </div>
                     </div>
@@ -314,91 +606,219 @@
                 Here are some of my academic and personal projects that showcase my skills in project management, UI/UX design, and research.
             </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
-                <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg animated-section-element" data-project-id="1">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756875423/Sabrina_s_Portfolio_1_qdhaop.png" alt="CitaUsaha Chatbot project screenshot" loading="lazy" class="w-full h-full object-cover transition duration-300 transform hover:scale-105" />
+            <div class="projects-scroll">
+                <!-- Row 1: scrolls left -->
+                <div class="projects-row-wrapper mb-6">
+                    <button class="scroll-btn scroll-btn-left" onclick="scrollRow(0, -320)">&#10094;</button>
+                    <div class="projects-row projects-row-left" id="projects-row-1">
+                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="1">
+                        <div class="h-48 bg-gray-700 p-3">
+                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756875423/Sabrina_s_Portfolio_1_qdhaop.png" alt="CitaUsaha Chatbot project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-100 mb-2">CitaUsaha Chatbot</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Chatbot</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">AI</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Project Leader</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-100 mb-2">CitaUsaha Chatbot</h3>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Chatbot</span>
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">AI</span>
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Project Leader</span>
+                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="2">
+                        <div class="h-48 bg-gray-700 p-3">
+                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756874987/Sabrina_s_Portfolio_v0edcm.png" alt="CoreMates App project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-100 mb-2">CoreMates Apps</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Figma</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">UI/UX</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Project Management</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="3">
+                        <div class="h-48 bg-gray-700 p-3">
+                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756875268/trackit_r6fm60.png" alt="TrackIt App project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-100 mb-2">TrackIt Apps</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Figma</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">UI/UX</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">FlutterFlow</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Finance</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="9">
+                        <div class="h-48 bg-gray-700 p-3">
+                            <img src="asset/3.png" alt="HokBen Transport System"loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-100 mb-2">HokBen Transport System</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Web App</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Logistics</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Project Management</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="10">
+                        <div class="h-48 bg-gray-700 p-3">
+                            <img src="asset/4.png" alt="DFO Deep Frying Oil Management" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-100 mb-2">DFO - Deep Frying Oil Management</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Web App</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">FnB Management</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Project Management</span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <button class="scroll-btn scroll-btn-right" onclick="scrollRow(0, 320)">&#10095;</button>
+                </div>
+                <!-- Row 2: scrolls right -->
+                <div class="projects-row-wrapper">
+                    <button class="scroll-btn scroll-btn-left" onclick="scrollRow(1, -320)">&#10094;</button>
+                    <div class="projects-row projects-row-right" id="projects-row-2">
+                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="4">
+                        <div class="h-48 bg-gray-700 p-3">
+                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756876104/Screenshot_2025-09-03_120742_hdvvjb.png" alt="Nonlinear Equation App project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-100 mb-2">Nonlinear Equation App</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">React.js</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Numerical Method</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="5">
+                        <div class="h-48 bg-gray-700 p-3">
+                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756876145/Screenshot_2025-09-03_120854_ecanmn.png" alt="Greedy & Dynamic Programming Scheduling project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-100 mb-2">Scheduling Optimization</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Greedy</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Dynamic Programming</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="6">
+                        <div class="h-48 bg-gray-700 p-3">
+                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756977982/Screenshot_2025-09-04_160435_ikbet2.png" alt="Greedy & Dynamic Programming Scheduling project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-100 mb-2">Decision Tree for Obesity Level Classification</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Machine Learning</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Data Science</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Health</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="7">
+                        <div class="h-48 bg-gray-700 p-3">
+                            <img src="1.png" alt="DST-GNN EEG Research" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-100 mb-2">DST-GNN for EEG-Based Early Detection</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Deep Learning</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">EEG</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Graph Neural Network</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="8">
+                        <div class="h-48 bg-gray-700 p-3">
+                            <img src="2.png" alt="Analisis Perbandingan Posyandu" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-100 mb-2">Analisis Perbandingan Pelayanan Posyandu</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Data Analysis</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Health</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Duplicate for infinite effect -->
+                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="4">
+                        <div class="h-48 bg-gray-700 p-3">
+                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756876104/Screenshot_2025-09-03_120742_hdvvjb.png" alt="Nonlinear Equation App project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-100 mb-2">Nonlinear Equation App</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">React.js</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Numerical Method</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="5">
+                        <div class="h-48 bg-gray-700 p-3">
+                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756876145/Screenshot_2025-09-03_120854_ecanmn.png" alt="Greedy & Dynamic Programming Scheduling project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-100 mb-2">Scheduling Optimization</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Greedy</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Dynamic Programming</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="6">
+                        <div class="h-48 bg-gray-700 p-3">
+                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756977982/Screenshot_2025-09-04_160435_ikbet2.png" alt="Greedy & Dynamic Programming Scheduling project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-100 mb-2">Decision Tree for Obesity Level Classification</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Machine Learning</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Data Science</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Health</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="7">
+                        <div class="h-48 bg-gray-700 p-3">
+                            <img src="1.png" alt="DST-GNN EEG Research" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-100 mb-2">DST-GNN for EEG-Based Early Detection</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Deep Learning</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">EEG</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Graph Neural Network</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="8">
+                        <div class="h-48 bg-gray-700 p-3">
+                            <img src="2.png" alt="Analisis Perbandingan Posyandu" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold text-gray-100 mb-2">Analisis Perbandingan Pelayanan Posyandu</h3>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Data Analysis</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Health</span>
+                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg animated-section-element" data-project-id="2">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756874987/Sabrina_s_Portfolio_v0edcm.png" alt="CoreMates App project screenshot" loading="lazy" class="w-full h-full object-cover transition duration-300 transform hover:scale-105" />
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-100 mb-2">CoreMates Apps</h3>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Figma</span>
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">UI/UX</span>
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Project Management</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg animated-section-element" data-project-id="3">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756875268/trackit_r6fm60.png" alt="TrackIt App project screenshot" loading="lazy" class="w-full h-full object-cover transition duration-300 transform hover:scale-105" />
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-100 mb-2">TrackIt Apps</h3>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Figma</span>
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">UI/UX</span>
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">FlutterFlow</span>
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Finance</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg animated-section-element" data-project-id="4">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756876104/Screenshot_2025-09-03_120742_hdvvjb.png" alt="Nonlinear Equation App project screenshot" loading="lazy" class="w-full h-full object-cover transition duration-300 transform hover:scale-105" />
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-100 mb-2">Nonlinear Equation App</h3>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">React.js</span>
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Numerical Method</span>
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg animated-section-element" data-project-id="5">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756876145/Screenshot_2025-09-03_120854_ecanmn.png" alt="Greedy & Dynamic Programming Scheduling project screenshot" loading="lazy" class="w-full h-full object-cover transition duration-300 transform hover:scale-105" />
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-100 mb-2">Scheduling Optimization</h3>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Greedy</span>
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Dynamic Programming</span>
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg animated-section-element" data-project-id="6">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756977982/Screenshot_2025-09-04_160435_ikbet2.png" alt="Greedy & Dynamic Programming Scheduling project screenshot" loading="lazy" class="w-full h-full object-cover transition duration-300 transform hover:scale-105" />
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-semibold text-gray-100 mb-2">Decision Tree for Obesity Level Classification</h3>
-                        <div class="flex flex-wrap gap-2 mb-4">
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Machine Learning</span>
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Data Science</span>
-                            <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Health</span>
-                        </div>
-                    </div>
+                    <button class="scroll-btn scroll-btn-right" onclick="scrollRow(1, 320)">&#10095;</button>
                 </div>
             </div>
         </div>
@@ -495,15 +915,25 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
                 <div class="text-xl font-bold mb-4 md:mb-0">PROJECT MANAGEMENT OFFICER</div>
-                <div class="text-gray-400">© 2025 Sabrina Laila Mutiara. All rights reserved.</div>
+                <div class="text-gray-400">© 2026 Sabrina Laila Mutiara. All rights reserved.</div>
             </div>
         </div>
     </footer>
 
     
-    <button id="backToTop" class="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 hidden transform hover:scale-110">
+    <button id="backToTop" class="fixed bottom-8 right-8 text-white p-3 rounded-full shadow-lg transition duration-300 hidden transform hover:scale-110" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 text-yellow-300 hidden">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+        <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 text-blue-300">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
         </svg>
     </button>
 
@@ -523,7 +953,7 @@
             <span class="close-button">&times;</span>
             <h3 class="text-2xl font-bold mb-4 text-gray-100" id="project-title"></h3>
             <p class="text-gray-400 mb-4" id="project-description"></p>
-            <a href="" target="_blank" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700" id="project-link">Lihat Proyek</a>
+            <a href="" target="_blank" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700" id="project-link">View Project</a>
         </div>
     </div>
 
@@ -564,11 +994,20 @@
 
     <script>
     const btn = document.getElementById("menu-btn");
-  const menu = document.getElementById("mobile-menu");
 
-  btn.addEventListener("click", () => {
-    menu.classList.toggle("hidden");
-  });
+    function openMobileMenu() {
+        document.getElementById('mobile-sidebar').classList.remove('translate-x-full');
+        document.getElementById('mobile-overlay').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+        document.getElementById('mobile-sidebar').classList.add('translate-x-full');
+        document.getElementById('mobile-overlay').classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    btn.addEventListener("click", openMobileMenu);
     const projectsData = {
         1: {
             title: "CitaUsaha Chatbot",
@@ -725,7 +1164,69 @@
         });
     });
   </script>
-    
+
+  <script>
+    function scrollRow(rowIndex, amount) {
+        const rows = document.querySelectorAll('.projects-row');
+        const row = rows[rowIndex];
+        if (!row) return;
+
+        const currentTransform = getComputedStyle(row).transform;
+        let currentX = 0;
+        if (currentTransform !== 'none') {
+            const matrix = new DOMMatrix(currentTransform);
+            currentX = matrix.m41;
+        }
+
+        row.style.animation = 'none';
+        row.style.transition = 'transform 0.3s ease';
+
+        let newX = currentX + amount;
+        const totalWidth = row.scrollWidth / 2;
+
+        if (newX > 0) {
+            newX = newX - totalWidth;
+        } else if (newX < -totalWidth) {
+            newX = newX + totalWidth;
+        }
+
+        row.style.transform = `translateX(${newX}px)`;
+
+        setTimeout(() => {
+            row.style.transition = '';
+            row.style.transform = '';
+            row.style.animation = '';
+        }, 3000);
+    }
+  </script>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const iconSun = document.getElementById('icon-sun');
+    const iconMoon = document.getElementById('icon-moon');
+    const html = document.documentElement;
+
+    function setTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        if (theme === 'light') {
+            iconSun.classList.remove('hidden');
+            iconMoon.classList.add('hidden');
+        } else {
+            iconMoon.classList.remove('hidden');
+            iconSun.classList.add('hidden');
+        }
+    }
+
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+  </script>
+
 
 </body>
 </html>
