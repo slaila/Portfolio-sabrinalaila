@@ -1,1232 +1,1613 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Sabrina's Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-blue: #0025ab;
-            --light-blue: #1a1a2e;
-            --dark-blue: #001a80;
-            --text-color: #d1d5db;
-            --bg-color: #0d0d1a;
-            --card-bg: #141428;
-            --section-bg: #1a1a2e;
-            --nav-bg: rgba(13, 13, 26, 0.7);
-            --border-color: rgba(0, 37, 171, 0.3);
-            --text-heading: #f3f4f6;
-            --text-secondary: #9ca3af;
-            --skill-bar-bg: #2a2a45;
-            --scrollbar-track: #1a1a2e;
-            --img-bg: #1a1a2e;
-        }
-
-        [data-theme="light"] {
-            --primary-blue: #0025ab;
-            --light-blue: #e8eeff;
-            --dark-blue: #001a80;
-            --text-color: #1a1a2e;
-            --bg-color: #eef2ff;
-            --card-bg: #dce4ff;
-            --section-bg: #e2e8ff;
-            --nav-bg: rgba(220, 228, 255, 0.8);
-            --border-color: rgba(0, 37, 171, 0.2);
-            --text-heading: #0d0d1a;
-            --text-secondary: #3a3a5c;
-            --skill-bar-bg: #c7d2fe;
-            --scrollbar-track: #c7d2fe;
-            --img-bg: #c7d2fe;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--text-color);
-            background-color: var(--bg-color);
-            line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        html {
-            scroll-padding-top: 5rem;
-        }
-
-        /* Custom scrollbar for a cleaner look */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--scrollbar-track);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-blue);
-            border-radius: 4px;
-        }
-
-        .projects-scroll {
-            overflow: hidden;
-            position: relative;
-        }
-
-        .projects-row-wrapper {
-            position: relative;
-            padding: 0 50px;
-        }
-
-        .projects-row {
-            display: flex;
-            gap: 1.5rem;
-            animation-timing-function: linear;
-            animation-iteration-count: infinite;
-        }
-
-        .projects-row .project-card {
-            min-width: 300px;
-            flex-shrink: 0;
-        }
-
-        .projects-row-left {
-            animation: scrollLeft 20s linear infinite;
-        }
-
-        .projects-row-right {
-            animation: scrollRight 20s linear infinite;
-        }
-
-        .projects-row:hover {
-            animation-play-state: paused;
-        }
-
-        .scroll-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-        }
-
-        .scroll-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3);
-        }
-
-        .scroll-btn-left {
-            left: 0;
-        }
-
-        .scroll-btn-right {
-            right: 0;
-        }
-
-        @keyframes scrollLeft {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        @keyframes scrollRight {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
-        }
-
-        .projects-scroll > * {
-            scroll-snap-align: start;
-        }
-
-        /* Hero Section Animation */
-        .hero {
-            background: linear-gradient(135deg, var(--bg-color) 0%, var(--light-blue) 100%);
-            transition: background 0.3s ease;
-        }
-
-        .animate-pop-in {
-            animation: popIn 0.8s ease-in-out forwards;
-            opacity: 0;
-            transform: scale(0.9);
-        }
-
-        .animate-fade-in-up {
-            animation: fadeInUp 1s ease-in-out forwards;
-            opacity: 0;
-        }
-
-        @keyframes popIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Interactivity and animation on scroll */
-        .animated-section-element {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .animated-section-element.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .project-card {
-            background-color: var(--card-bg);
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-        }
-
-        [data-theme="light"] .project-card {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
-        }
-
-        [data-theme="light"] .project-card:hover {
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.12);
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Skill bar animation */
-        .skill-bar {
-            background-color: var(--skill-bar-bg);
-            border-radius: 9999px;
-            height: 8px;
-            overflow: hidden;
-            transition: background-color 0.3s ease;
-        }
-
-        .skill-progress {
-            background: var(--primary-blue);
-            height: 100%;
-            border-radius: 9999px;
-            width: 0;
-            transition: width 1.5s ease-in-out, background-color 0.3s ease;
-        }
-
-        /* Modal styling */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.6);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: var(--card-bg);
-            padding: 24px;
-            border-radius: 12px;
-            text-align: center;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-            position: relative;
-            animation: modalFadeIn 0.3s ease-in-out;
-        }
-
-        [data-theme="light"] .modal-content {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Theme toggle */
-        .theme-toggle {
-            position: fixed;
-            bottom: 8px;
-            left: 24px;
-            z-index: 50;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 4px 15px rgba(96, 165, 250, 0.3);
-        }
-
-        [data-theme="light"] .theme-toggle {
-            background: rgba(0, 37, 171, 0.1);
-            border: 1px solid rgba(0, 37, 171, 0.2);
-        }
-
-        [data-theme="light"] .theme-toggle:hover {
-            background: rgba(0, 37, 171, 0.2);
-            border-color: rgba(0, 37, 171, 0.4);
-            box-shadow: 0 4px 15px rgba(0, 37, 171, 0.2);
-        }
-
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            color: #aaa;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close-button:hover,
-        .close-button:focus {
-            color: #d1d5db;
-            text-decoration: none;
-        }
-
-        /* Light mode overrides for Tailwind classes */
-        [data-theme="light"] body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-        }
-
-        [data-theme="light"] .bg-gray-900,
-        [data-theme="light"] .bg-gray-800 {
-            background-color: var(--card-bg) !important;
-        }
-
-        [data-theme="light"] section.bg-gray-800 {
-            background-color: var(--section-bg) !important;
-        }
-
-        [data-theme="light"] section.bg-gray-900 {
-            background-color: var(--bg-color) !important;
-        }
-
-        [data-theme="light"] .text-gray-100,
-        [data-theme="light"] .text-gray-200 {
-            color: var(--text-heading) !important;
-        }
-
-        [data-theme="light"] .text-gray-300,
-        [data-theme="light"] .text-gray-400 {
-            color: var(--text-secondary) !important;
-        }
-
-        [data-theme="light"] .text-gray-500 {
-            color: #6b7280 !important;
-        }
-
-        [data-theme="light"] .text-blue-400 {
-            color: var(--primary-blue) !important;
-        }
-
-        [data-theme="light"] .text-blue-300 {
-            color: #0025ab !important;
-        }
-
-        [data-theme="light"] .bg-blue-900 {
-            background-color: #c7d2fe !important;
-        }
-
-        [data-theme="light"] .bg-blue-600 {
-            background-color: #0025ab !important;
-        }
-
-        [data-theme="light"] .border-blue-400 {
-            border-color: #0025ab !important;
-        }
-
-        [data-theme="light"] .hover\:bg-blue-800:hover {
-            background-color: rgba(0, 37, 171, 0.15) !important;
-        }
-
-        [data-theme="light"] .bg-gray-700 {
-            background-color: var(--img-bg) !important;
-        }
-
-        [data-theme="light"] .border-blue-400 {
-            border-color: var(--primary-blue) !important;
-        }
-
-        [data-theme="light"] .hero {
-            background: linear-gradient(135deg, var(--bg-color) 0%, var(--light-blue) 100%) !important;
-        }
-
-        [data-theme="light"] nav {
-            background: var(--nav-bg) !important;
-            border-bottom-color: var(--border-color) !important;
-        }
-
-        [data-theme="light"] #mobile-sidebar {
-            background: rgba(220, 228, 255, 0.95) !important;
-            border-left-color: var(--border-color) !important;
-        }
-
-        [data-theme="light"] #mobile-sidebar a {
-            color: #1a1a2e !important;
-        }
-
-        [data-theme="light"] #mobile-sidebar a:hover {
-            color: #0025ab !important;
-        }
-
-        [data-theme="light"] .scroll-btn {
-            background: rgba(0, 37, 171, 0.1);
-            border-color: rgba(0, 37, 171, 0.2);
-            color: #0025ab;
-        }
-
-        [data-theme="light"] .scroll-btn:hover {
-            background: rgba(0, 37, 171, 0.2);
-            border-color: rgba(0, 37, 171, 0.4);
-            box-shadow: 0 4px 15px rgba(0, 37, 171, 0.2);
-        }
-
-        [data-theme="light"] #backToTop {
-            background: rgba(0, 37, 171, 0.1) !important;
-            border-color: rgba(0, 37, 171, 0.2) !important;
-            color: #0025ab !important;
-        }
-
-        [data-theme="light"] footer {
-            background-color: var(--section-bg) !important;
-            color: var(--text-color) !important;
-        }
-
-
-        [data-theme="light"] input,
-        [data-theme="light"] textarea {
-            background-color: #dce4ff !important;
-            border-color: #a5b4fc !important;
-            color: #1a1a2e !important;
-        }
-
-        [data-theme="light"] input::placeholder,
-        [data-theme="light"] textarea::placeholder {
-            color: #6b7280 !important;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+  <title>Sabrina Laila Mutiara — Project Management Officer</title>
+  <meta name="description"
+    content="Portfolio of Sabrina Laila Mutiara - Project Management Officer & Agile Strategist specializing in digital products, logistics workflows, and technical delivery." />
+
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-background": "#f8fafc",
+            "on-tertiary": "#ffffff",
+            "surface-container-lowest": "#060911",
+            "on-primary": "#031738",
+            "on-surface-variant": "#94a3b8",
+            "surface-dim": "#0b1120",
+            "surface-container-low": "#0f172a",
+            "on-secondary": "#ffffff",
+            "secondary": "#94a3b8",
+            "surface": "#0f172a",
+            "outline": "#334155",
+            "on-primary-fixed": "#dbeafe",
+            "inverse-on-surface": "#0b1120",
+            "primary": "#3b82f6",
+            "primary-dark": "#2563eb",
+            "inverse-surface": "#f8fafc",
+            "outline-variant": "#1e293b",
+            "secondary-fixed": "#1e293b",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed-variant": "#c7d2fe",
+            "tertiary-fixed": "#312e81",
+            "surface-variant": "#1e293b",
+            "error-container": "#7f1d1d",
+            "surface-container-high": "#1e293b",
+            "error": "#f87171",
+            "on-surface": "#f8fafc",
+            "primary-fixed": "#1e3a8a",
+            "on-tertiary-fixed": "#e0e7ff",
+            "on-error-container": "#fecaca",
+            "primary-container": "#2563eb",
+            "on-secondary-fixed-variant": "#cbd5e1",
+            "tertiary": "#818cf8",
+            "surface-bright": "#1e293b",
+            "background": "#090d16",
+            "on-primary-container": "#eff6ff",
+            "secondary-fixed-dim": "#334155",
+            "tertiary-container": "#4f46e5",
+            "inverse-primary": "#1d4ed8",
+            "primary-fixed-dim": "#1e40af",
+            "on-secondary-fixed": "#f1f5f9",
+            "secondary-container": "#1e293b",
+            "on-tertiary-container": "#e0e7ff",
+            "tertiary-fixed-dim": "#3730a3",
+            "on-secondary-container": "#94a3b8",
+            "on-primary-fixed-variant": "#93c5fd",
+            "surface-tint": "#60a5fa",
+            "surface-container": "#111827",
+            "surface-container-highest": "#1f293d"
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            body: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Theme variables & transitions */
+    :root {
+      --bg-color: #f8f9ff;
+      --text-main: #0b1c30;
+      --card-bg: rgba(255, 255, 255, 0.88);
+      --nav-bg: rgba(255, 255, 255, 0.85);
+      --border-subtle: rgba(219, 225, 255, 0.7);
+      --grid-line: rgba(203, 219, 245, 0.4);
+    }
+
+    html.dark {
+      --bg-color: #090d16;
+      --text-main: #f8fafc;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --nav-bg: rgba(9, 13, 22, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --grid-line: rgba(51, 65, 85, 0.22);
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .bg-grid-pattern {
+      background-size: 32px 32px;
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    }
+
+    .mesh-glow-blue {
+      background: radial-gradient(circle at 60% 30%, rgba(59, 130, 246, 0.22) 0%, rgba(99, 102, 241, 0.08) 50%, transparent 75%);
+    }
+
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .glass-nav {
+      background: var(--nav-bg);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.4);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #3b82f6;
+      border-radius: 4px;
+    }
+
+    /* Project Cards Hover Glow */
+    .project-card-glow {
+      transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.3s cubic-bezier(0.2, 0, 0, 1), border-color 0.3s ease;
+    }
+
+    .project-card-glow:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Modal Animation */
+    .modal-backdrop {
+      background: rgba(4, 7, 15, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+  </style>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
-<body class="bg-gray-900">
-    <!-- Navigation -->
-    <nav class="sticky top-0 z-50 rounded-b-xl transition duration-300" style="background: rgba(13, 13, 26, 0.7); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0, 37, 171, 0.3);">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <a href="#home" class="flex items-center space-x-2 text-xl font-bold text-gray-100">
-                    <img src="https://res.cloudinary.com/dpxubzytn/image/upload/v1754575719/logopbi_b429qa.png" alt="Logo" class="h-10 w-auto">
-                    
-                </a>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="text-gray-300 hover:text-blue-400 transition duration-300">Home</a>
-                    <a href="#about" class="text-gray-300 hover:text-blue-400 transition duration-300">About</a>
-                    <a href="#projects" class="text-gray-300 hover:text-blue-400 transition duration-300">Projects</a>
-                    <a href="#contact" class="text-gray-300 hover:text-blue-400 transition duration-300">Contact</a>
-                </div>
-                <!-- Mobile button -->
-                <button id="menu-btn" class="md:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" 
-                        viewBox="0 0 24 24" stroke="currentColor" 
-                        class="h-6 w-6 text-gray-300">
-                    <path stroke-linecap="round" stroke-linejoin="round" 
-                            stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
-            </div>
 
-            </div>
-        </div>
-    </nav>
+<body class="font-sans antialiased selection:bg-blue-600 selection:text-white min-h-screen relative overflow-x-hidden">
 
-    <!-- Mobile Sidebar -->
-    <div id="mobile-overlay" class="fixed inset-0 bg-black/50 z-[60] hidden" onclick="closeMobileMenu()"></div>
-    <div id="mobile-sidebar" class="fixed top-0 right-0 h-full w-64 z-[70] transform translate-x-full transition-transform duration-300" style="background: rgba(31, 41, 55, 0.8); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-left: 1px solid rgba(255, 255, 255, 0.1);">
-        <div class="flex justify-end p-6">
-            <button onclick="closeMobileMenu()" class="text-gray-300 hover:text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                </svg>
-            </button>
+  <!-- Ambient Decorative Background -->
+  <div class="fixed inset-0 bg-grid-pattern pointer-events-none -z-10"></div>
+  <div
+    class="fixed top-0 right-0 w-[650px] h-[650px] mesh-glow-blue rounded-full filter blur-3xl pointer-events-none -z-10">
+  </div>
+  <div
+    class="fixed top-[30%] left-[-150px] w-[520px] h-[520px] bg-blue-600/15 rounded-full filter blur-[130px] pointer-events-none -z-10">
+  </div>
+  <div
+    class="fixed top-[65%] right-[-100px] w-[450px] h-[450px] bg-indigo-600/15 rounded-full filter blur-[120px] pointer-events-none -z-10">
+  </div>
+
+  <!-- BEGIN: Navigation Bar -->
+  <header class="sticky top-0 z-50 w-full transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
+      <nav
+        class="glass-nav rounded-2xl px-4 sm:px-5 py-3.5 flex items-center justify-between shadow-2xl shadow-black/20"
+        aria-label="Primary Navigation">
+        <!-- Brand / Identity -->
+        <a class="flex items-center gap-3 group" href="#hero">
+          <div
+            class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 flex items-center justify-center text-white shadow-lg shadow-blue-500/30 group-hover:scale-105 transition-transform duration-200">
+            <svg class="w-5 h-5 stroke-current fill-none stroke-2" stroke-linecap="round" stroke-linejoin="round"
+              viewBox="0 0 24 24">
+              <rect height="14" rx="2" width="20" x="2" y="3"></rect>
+              <line x1="8" x2="16" y1="21" y2="21"></line>
+              <line x1="12" x2="12" y1="17" y2="21"></line>
+              <path d="m10 9.5-2 2 2 2"></path>
+              <path d="m14 9.5 2 2-2 2"></path>
+            </svg>
+          </div>
+          <div>
+            <span class="font-bold tracking-tight text-base flex items-center gap-1.5 dark:text-white text-slate-900">
+              Sabrina Laila Mutiara
+            </span>
+            <span class="text-xs block text-slate-500 dark:text-slate-400 font-medium">Project Management Officer</span>
+          </div>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <div class="hidden lg:flex items-center space-x-1 font-medium text-sm text-slate-600 dark:text-slate-300">
+          <a class="px-3 py-1.5 rounded-lg text-blue-600 dark:text-blue-400 font-semibold bg-blue-500/10 border border-blue-500/25 transition-colors"
+            href="#hero">Home</a>
+          <a class="px-3 py-1.5 rounded-lg hover:text-blue-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+            href="#about">About</a>
+          <a class="px-3 py-1.5 rounded-lg hover:text-blue-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+            href="#skills">Skills</a>
+          <a class="px-3 py-1.5 rounded-lg hover:text-blue-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+            href="#tools">Tools</a>
+          <a class="px-3 py-1.5 rounded-lg hover:text-blue-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+            href="#education">Education</a>
+          <a class="px-3 py-1.5 rounded-lg hover:text-blue-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+            href="#projects">Projects</a>
+          <a class="px-3 py-1.5 rounded-lg hover:text-blue-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+            href="#contact">Contact</a>
         </div>
-        <div class="flex flex-col space-y-6 px-6">
-            <a href="#home" onclick="closeMobileMenu()" class="text-gray-200 hover:text-blue-400 transition text-lg">Home</a>
-            <a href="#about" onclick="closeMobileMenu()" class="text-gray-200 hover:text-blue-400 transition text-lg">About</a>
-            <a href="#projects" onclick="closeMobileMenu()" class="text-gray-200 hover:text-blue-400 transition text-lg">Projects</a>
-            <a href="#contact" onclick="closeMobileMenu()" class="text-gray-200 hover:text-blue-400 transition text-lg">Contact</a>
+
+        <!-- Right Action Controls (Theme Toggle & Hire Me) -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- Theme Toggle Button -->
+          <button id="theme-toggle" type="button" aria-label="Toggle light and dark mode"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-200/80 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 shadow-sm transition-all hover:border-blue-500 active:scale-95">
+            <!-- Sun icon for light mode -->
+            <svg id="theme-icon-light" class="w-3.5 h-3.5 text-amber-500 hidden" fill="currentColor"
+              viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                clip-rule="evenodd"></path>
+            </svg>
+            <!-- Moon icon for dark mode -->
+            <svg id="theme-icon-dark" class="w-3.5 h-3.5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <span id="theme-text">Dark</span>
+          </button>
+
+          <!-- Hire Me CTA -->
+          <a class="inline-flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2.5 rounded-xl text-white bg-blue-600 hover:bg-blue-700 active:scale-95 transition-all shadow-lg shadow-blue-500/30"
+            href="#contact">
+            <span>Hire Me</span>
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+            </svg>
+          </a>
+
+          <!-- Mobile Hamburger -->
+          <button id="mobile-menu-toggle" aria-label="Open mobile menu"
+            class="lg:hidden p-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-blue-500 transition-colors">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
         </div>
+      </nav>
     </div>
+  </header>
+  <!-- END: Navigation Bar -->
 
-    <!-- Hero -->
-    <section id="home" class="hero min-h-screen flex items-center py-20 md:py-0">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-12">
-            <div class="md:w-1/2 text-center md:text-left animated-section-element">
-                <h1 class="text-4xl md:text-6xl font-bold mb-2 animate-pop-in">
-                    <span class="text-gray-100">Hi, I'm</span>
-                    <span class="text-blue-400"> Sabrina Laila Mutiara</span>
-                </h1>
-                <p class="text-xl md:text-2xl text-gray-300 font-medium mb-6 animate-pop-in" style="animation-delay: 0.2s;">
-                    <span class="text-blue-400">👩‍💻 PROJECT MANAGEMENT OFFICER</span>
-                </p>
-                <div class="flex justify-center md:justify-start space-x-4 animate-pop-in" style="animation-delay: 0.4s;">
-                    <a href="#projects" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition duration-300 transform hover:scale-105">View My Work</a>
-                    <a href="#contact" class="border border-blue-400 text-blue-400 hover:bg-blue-800 px-6 py-3 rounded-lg transition duration-300 transform hover:scale-105">Contact Me</a>
-                </div>
-            </div>
-            <div class="md:w-1/2 flex justify-center animated-section-element" style="animation-delay: 0.6s;">
-                <div class="relative w-64 h-64 md:w-80 md:h-80 bg-blue-900 rounded-full overflow-hidden shadow-xl transform transition-transform duration-300 hover:scale-105">
-                <img src="https://res.cloudinary.com/dpxubzytn/image/upload/v1754491236/animateme_odhcee.png" 
-                    alt="Portrait of Sabrina" 
-                    loading="lazy" 
-                    class="w-full h-full object-cover"/>
-            </div>
-            
-            <div class="absolute bottom-0 right-0 bg-gray-800 p-3 rounded-xl shadow-md transform transition-transform duration-300 hover:scale-110 z-10">
-                <div class="flex items-center space-x-2">
-                    <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                    <span class="text-sm text-gray-100">Available for work!</span>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Mobile Sidebar Drawer -->
+  <div id="mobile-sidebar"
+    class="fixed inset-y-0 right-0 w-72 bg-slate-900 border-l border-slate-800 shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between p-6">
+    <div>
+      <div class="flex items-center justify-between pb-6 border-b border-slate-800">
+        <span class="font-bold text-white text-base">Sabrina Laila Mutiara</span>
+        <button id="mobile-menu-close" aria-label="Close menu" class="p-2 text-slate-400 hover:text-white rounded-lg">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="flex flex-col space-y-3 mt-6 text-slate-300 font-medium text-sm">
+        <a class="mobile-nav-link p-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-400 transition"
+          href="#hero">Home</a>
+        <a class="mobile-nav-link p-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-400 transition"
+          href="#about">About</a>
+        <a class="mobile-nav-link p-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-400 transition"
+          href="#skills">Skills</a>
+        <a class="mobile-nav-link p-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-400 transition"
+          href="#tools">Tools</a>
+        <a class="mobile-nav-link p-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-400 transition"
+          href="#education">Education</a>
+        <a class="mobile-nav-link p-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-400 transition"
+          href="#projects">Projects</a>
+        <a class="mobile-nav-link p-2.5 rounded-lg hover:bg-slate-800 hover:text-blue-400 transition"
+          href="#contact">Contact</a>
+      </div>
+    </div>
+    <div class="pt-6 border-t border-slate-800">
+      <a href="CV_Sabrina Laila Mutiara.pdf" target="_blank"
+        class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-center block shadow-lg shadow-blue-500/25">
+        View Full CV
+      </a>
+    </div>
+  </div>
+  <div id="mobile-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden"></div>
 
-    <!-- About-->
-    <section id="about" class="py-20 bg-gray-900">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center text-gray-100 mb-16 animated-section-element">About <span class="text-blue-400">Me</span></h2>
-            <div class="flex flex-col md:flex-row gap-12 items-center">
-                <div class="md:w-1/2 animated-section-element" style="animation-delay: 0.2s;">
-                    <h3 class="text-2xl font-semibold text-gray-100 mb-4">Building Digital Experiences</h3>
-                    <p class="text-gray-400 mb-6">👋 Hello! I'm a passionate project manager with experience in leading teams and delivering impactful projects 🎯 I specialize in organizing workflows, ensuring collaboration, and driving results that create real value 🚀</p>
-                    <p class="text-gray-400 mb-8">🔍 With attention to detail and a strong commitment to growth, I focus on clear communication 📢, efficient execution, and continuous improvement to achieve successful project outcomes ✨</p>
-                    <div class="flex space-x-4">
-                        <a href="cv-viewer.html" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300 transform hover:scale-105">See CV</a>
-                        <a href="#contact" class="border border-blue-400 text-blue-400 hover:bg-blue-800 px-6 py-2 rounded-lg transition duration-300 transform hover:scale-105">Hire Me</a>
-                    </div>
-                </div>
-                <div class="md:w-1/2 animated-section-element" style="animation-delay: 0.4s;">
-                    <h3 class="text-2xl font-semibold text-gray-100 mb-6">My Skills</h3>
-                    <div class="space-y-6">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium text-gray-300">Project Management</span>
-                                <span class="text-gray-400 skill-percent" data-percent="90">0%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" id="skill1" data-width="90%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium text-gray-300">Data Analysis</span>
-                                <span class="text-gray-400 skill-percent" data-percent="85">0%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" id="skill3" data-width="85%"></div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium text-gray-300">UI/UX Design</span>
-                                <span class="text-gray-400 skill-percent" data-percent="80">0%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" id="skill2" data-width="80%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-12 animated-section-element" style="animation-delay: 0.6s;">
-                <h3 class="text-2xl font-semibold text-gray-100 mb-4">Education</h3>
-                <div class="space-y-6">
-                    <div class="bg-gray-800 shadow-md rounded-xl p-6 transform transition-transform duration-300 hover:scale-[1.02]">
-                        <h4 class="font-semibold text-gray-200">Bachelor of Computer Science</h4>
-                        <p class="text-gray-400">Mercu Buana University, 2023 - 2027</p>
-                        <p class="text-gray-500 mt-2">Focused on software development, algorithms, and data structures.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <main>
+    <!-- BEGIN: Hero Section -->
+    <section class="relative pt-10 pb-16 lg:pt-20 lg:pb-24 overflow-hidden" id="hero">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
 
-    <!-- Projects-->
-    <section id="projects" class="py-20 bg-gray-800">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center text-gray-100 mb-4 animated-section-element">
-                My <span class="text-blue-400">Projects</span>
-            </h2>
-            <p class="text-center text-gray-400 max-w-2xl mx-auto mb-16 animated-section-element">
-                Here are some of my academic and personal projects that showcase my skills in project management, UI/UX design, and research.
+          <!-- Left Column: Copy & Actions -->
+          <div class="lg:col-span-7 flex flex-col justify-center text-left">
+            <!-- Availability Pill -->
+            <div
+              class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white border border-emerald-300 dark:bg-slate-900/90 dark:border-emerald-500/30 shadow-xs dark:shadow-lg dark:shadow-emerald-500/10 mb-6 w-fit backdrop-blur-md transition-all">
+              <span class="relative flex h-2.5 w-2.5">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 dark:bg-emerald-400"></span>
+              </span>
+              <span class="text-xs font-semibold text-slate-700 dark:text-emerald-300 tracking-wide">Available for new
+                PM / PMO roles &amp; strategic initiatives</span>
+            </div>
+
+            <!-- Role Badge -->
+            <div
+              class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-500 dark:text-blue-400 mb-3">
+              <span
+                class="px-2.5 py-1 rounded-md bg-blue-100 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-300">🧑‍💻
+                PROJECT MANAGEMENT OFFICER</span>
+              <span class="text-slate-400 dark:text-slate-600">•</span>
+              <span class="text-slate-600 dark:text-slate-400">AGILE STRATEGIST</span>
+            </div>
+
+            <!-- Main Headline -->
+            <h1
+              class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15] mb-5 dark:text-white text-slate-900">
+              Hi, I'm <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-500 to-cyan-500 dark:from-blue-400 dark:via-indigo-300 dark:to-cyan-300">Sabrina
+                Laila Mutiara</span>
+            </h1>
+
+            <!-- Narrative Paragraph -->
+            <p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed font-body max-w-2xl mb-8">
+              Orchestrating high-velocity engineering, logistics, and digital product workflows. I bridge the gap
+              between ambitious business targets, sprint execution, and predictable delivery with zero friction.
             </p>
 
-            <div class="projects-scroll">
-                <!-- Row 1: scrolls left -->
-                <div class="projects-row-wrapper mb-6">
-                    <button class="scroll-btn scroll-btn-left" onclick="scrollRow(0, -320)">&#10094;</button>
-                    <div class="projects-row projects-row-left" id="projects-row-1">
-                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="1">
-                        <div class="h-48 bg-gray-700 p-3">
-                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756875423/Sabrina_s_Portfolio_1_qdhaop.png" alt="CitaUsaha Chatbot project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-2">CitaUsaha Chatbot</h3>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Chatbot</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">AI</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Project Leader</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="2">
-                        <div class="h-48 bg-gray-700 p-3">
-                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756874987/Sabrina_s_Portfolio_v0edcm.png" alt="CoreMates App project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-2">CoreMates Apps</h3>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Figma</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">UI/UX</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Project Management</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="3">
-                        <div class="h-48 bg-gray-700 p-3">
-                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756875268/trackit_r6fm60.png" alt="TrackIt App project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-2">TrackIt Apps</h3>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Figma</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">UI/UX</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">FlutterFlow</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Finance</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="9">
-                        <div class="h-48 bg-gray-700 p-3">
-                            <img src="asset/3.png" alt="HokBen Transport System"loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-2">HokBen Transport System</h3>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Web App</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Logistics</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Project Management</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="10">
-                        <div class="h-48 bg-gray-700 p-3">
-                            <img src="asset/4.png" alt="DFO Deep Frying Oil Management" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-2">DFO - Deep Frying Oil Management</h3>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Web App</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">FnB Management</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Project Management</span>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    <button class="scroll-btn scroll-btn-right" onclick="scrollRow(0, 320)">&#10095;</button>
-                </div>
-                <!-- Row 2: scrolls right -->
-                <div class="projects-row-wrapper">
-                    <button class="scroll-btn scroll-btn-left" onclick="scrollRow(1, -320)">&#10094;</button>
-                    <div class="projects-row projects-row-right" id="projects-row-2">
-                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="4">
-                        <div class="h-48 bg-gray-700 p-3">
-                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756876104/Screenshot_2025-09-03_120742_hdvvjb.png" alt="Nonlinear Equation App project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-2">Nonlinear Equation App</h3>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">React.js</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Numerical Method</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="5">
-                        <div class="h-48 bg-gray-700 p-3">
-                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756876145/Screenshot_2025-09-03_120854_ecanmn.png" alt="Greedy & Dynamic Programming Scheduling project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-2">Scheduling Optimization</h3>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Greedy</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Dynamic Programming</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="6">
-                        <div class="h-48 bg-gray-700 p-3">
-                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756977982/Screenshot_2025-09-04_160435_ikbet2.png" alt="Greedy & Dynamic Programming Scheduling project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-2">Decision Tree for Obesity Level Classification</h3>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Machine Learning</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Data Science</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Health</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="7">
-                        <div class="h-48 bg-gray-700 p-3">
-                            <img src="1.png" alt="DST-GNN EEG Research" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-2">DST-GNN for EEG-Based Early Detection</h3>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Deep Learning</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">EEG</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Graph Neural Network</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="8">
-                        <div class="h-48 bg-gray-700 p-3">
-                            <img src="2.png" alt="Analisis Perbandingan Posyandu" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-2">Analisis Perbandingan Pelayanan Posyandu</h3>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Data Analysis</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Health</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Duplicate for infinite effect -->
-                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="4">
-                        <div class="h-48 bg-gray-700 p-3">
-                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756876104/Screenshot_2025-09-03_120742_hdvvjb.png" alt="Nonlinear Equation App project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-2">Nonlinear Equation App</h3>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">React.js</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Numerical Method</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="5">
-                        <div class="h-48 bg-gray-700 p-3">
-                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756876145/Screenshot_2025-09-03_120854_ecanmn.png" alt="Greedy & Dynamic Programming Scheduling project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-2">Scheduling Optimization</h3>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Greedy</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Dynamic Programming</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="6">
-                        <div class="h-48 bg-gray-700 p-3">
-                            <img src="https://res.cloudinary.com/de5cdqnvf/image/upload/v1756977982/Screenshot_2025-09-04_160435_ikbet2.png" alt="Greedy & Dynamic Programming Scheduling project screenshot" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-2">Decision Tree for Obesity Level Classification</h3>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Machine Learning</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Data Science</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Health</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="7">
-                        <div class="h-48 bg-gray-700 p-3">
-                            <img src="1.png" alt="DST-GNN EEG Research" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-2">DST-GNN for EEG-Based Early Detection</h3>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Deep Learning</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">EEG</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Graph Neural Network</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="project-card bg-gray-800 rounded-xl overflow-hidden shadow-lg" data-project-id="8">
-                        <div class="h-48 bg-gray-700 p-3">
-                            <img src="2.png" alt="Analisis Perbandingan Posyandu" loading="lazy" class="w-full h-full object-contain rounded-lg transition duration-300 transform hover:scale-105" />
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-2">Analisis Perbandingan Pelayanan Posyandu</h3>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Data Analysis</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Health</span>
-                                <span class="px-3 py-1 bg-blue-900 text-blue-300 rounded-full text-xs">Publication</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    <button class="scroll-btn scroll-btn-right" onclick="scrollRow(1, 320)">&#10095;</button>
-                </div>
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap items-center gap-4 pt-1">
+              <a class="inline-flex items-center justify-center gap-2.5 text-sm font-semibold px-6 py-3.5 rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/35 hover:shadow-blue-500/50 hover:-translate-y-0.5"
+                href="#projects">
+                <span>View My Work</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M17 8l4 4m0 0l-4 4m4-4H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2">
+                  </path>
+                </svg>
+              </a>
+              <a class="inline-flex items-center justify-center gap-2 text-sm font-semibold px-6 py-3.5 rounded-xl dark:text-white text-slate-800 bg-slate-200/80 dark:bg-white/5 border border-slate-300 dark:border-white/15 hover:border-blue-500 transition-all backdrop-blur-md"
+                href="#contact">
+                <span>Contact Me</span>
+              </a>
             </div>
+
+            <!-- Quick Trust Bar -->
+            <div
+              class="mt-10 pt-6 border-t border-slate-200 dark:border-slate-800 flex items-center gap-4 text-xs text-slate-500 dark:text-slate-400 font-medium">
+              <div class="flex -space-x-2 overflow-hidden">
+                <div
+                  class="inline-block h-7 w-7 rounded-full ring-2 ring-slate-900 bg-blue-600 text-white text-[10px] font-bold flex items-center justify-center">
+                  PM</div>
+                <div
+                  class="inline-block h-7 w-7 rounded-full ring-2 ring-slate-900 bg-indigo-500 text-white text-[10px] font-bold flex items-center justify-center">
+                  IT</div>
+                <div
+                  class="inline-block h-7 w-7 rounded-full ring-2 ring-slate-900 bg-emerald-500 text-white text-[10px] font-bold flex items-center justify-center">
+                  QA</div>
+              </div>
+              <p>Proven track record across multi-stakeholder teams in FnB, Logistics &amp; Digital Products</p>
+            </div>
+          </div>
+
+          <!-- Right Column: Avatar Display -->
+          <div class="lg:col-span-5 relative flex items-center justify-center">
+            <div
+              class="absolute w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-tr from-blue-500/30 via-indigo-500/20 to-cyan-500/25 blur-3xl -z-10">
+            </div>
+            <div
+              class="relative p-3 sm:p-4 rounded-full bg-gradient-to-b from-blue-500/20 via-slate-800/60 to-slate-900/90 shadow-2xl shadow-blue-500/20 border border-white/10 backdrop-blur-sm">
+              <!-- Avatar Frame with Profile Picture -->
+              <div
+                class="w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden border-4 border-slate-800/80 shadow-inner relative bg-[#d9d9d9] flex items-center justify-center">
+                <img alt="Sabrina Laila Mutiara"
+                  class="w-full h-full object-contain transform origin-center scale-105 translate-y-2 transition-transform duration-500 hover:scale-110"
+                  loading="eager"
+                  src="asset/profile.png" />
+              </div>
+
+              <!-- Floating Micro-Badge 1: Framework -->
+              <div
+                class="absolute -top-2 -right-2 glass-card px-3.5 py-2 rounded-xl shadow-xl border border-white/10 flex items-center gap-2">
+                <span
+                  class="w-7 h-7 rounded-lg bg-blue-500/20 border border-blue-500/30 text-blue-400 flex items-center justify-center text-xs font-bold">🎯</span>
+                <div>
+                  <p class="text-[10px] uppercase font-bold text-slate-400 leading-none">Framework</p>
+                  <p class="text-xs font-bold dark:text-white text-slate-900">Scrum / Agile / PMO</p>
+                </div>
+              </div>
+
+              <!-- Floating Micro-Badge 2: Available Status Pill -->
+              <div
+                class="absolute bottom-3 -right-2 glass-card px-3.5 py-1.5 rounded-full shadow-xl border border-white/10 flex items-center gap-2 text-xs font-semibold text-slate-200">
+                <span class="h-2.5 w-2.5 rounded-full bg-emerald-400 inline-block ring-2 ring-emerald-400/40"></span>
+                <span class="dark:text-slate-200 text-slate-800 font-semibold">Available for work!</span>
+              </div>
+            </div>
+          </div>
+
         </div>
+      </div>
     </section>
+    <!-- END: Hero Section -->
 
-    <!-- Contact -->
-    <section id="contact" class="py-20 bg-gray-900">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center text-gray-100 mb-16 animated-section-element">Get In <span class="text-blue-400">Touch</span></h2>
-            <div class="flex flex-col md:flex-row gap-12">
-                <div class="md:w-1/2">
-                    <h3 class="text-2xl font-semibold text-gray-100 mb-6 animated-section-element">Contact Information</h3>
-                    <div class="space-y-6">
-                        
-                        <div class="flex items-center space-x-4 animated-section-element" style="animation-delay: 0.2s;">
-                            <div class="bg-blue-900 p-3 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 text-blue-400">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <p class="text-gray-400">Email</p>
-                                <p class="text-gray-200 font-medium">slailamutiara@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-4 animated-section-element" style="animation-delay: 0.4s;">
-                            <div class="bg-blue-900 p-3 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6 text-blue-400">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                            </div>
-                            <div>
-                                <p class="text-gray-400">Location</p>
-                                <p class="text-gray-200 font-medium">Jakarta, Indonesia</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-8">
-                        <h4 class="text-xl font-semibold text-gray-100 mb-4 animated-section-element" style="animation-delay: 0.6s;">Social Media</h4>
-                        <div class="flex space-x-4 animated-section-element" style="animation-delay: 0.8s;">
-                            <a href="https://instagram.com/sbrinla/" target="_blank"
-                                class="bg-gray-700 p-3 rounded-full hover:bg-gray-600 transition transform hover:scale-110">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-                                    viewBox="0 0 24 24" fill="currentColor" class="text-blue-400">
-                                    <path d="M7.75 2h8.5C19.1 2 21 3.9 21 6.25v11.5C21 20.1 19.1 22 16.25 22h-8.5C4.9 22 3 20.1 3 17.75V6.25C3 3.9 4.9 2 7.75 2zM12 7a5 5 0 100 10 5 5 0 000-10zm6.5-2a1.5 1.5 0 10-.001 3.001A1.5 1.5 0 0018.5 5zM12 9a3 3 0 110 6 3 3 0 010-6z"/>
-                                </svg>
-                                </a>
-
-                            <a href="https://www.linkedin.com/in/sabrinalailamutiara/" target="_blank" class="bg-gray-700 p-3 rounded-full hover:bg-gray-600 transition transform hover:scale-110">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" target="_blank" fill="currentColor" class="text-blue-400">
-                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                                </svg>
-                            </a>
-                            <a href="https://github.com/slaila/" class="bg-gray-700 p-3 rounded-full hover:bg-gray-600 transition transform hover:scale-110">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" target="_blank" fill="currentColor" class="text-blue-400">
-                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Contact Form -->
-                <div class="md:w-1/2 animated-section-element" style="animation-delay: 0.8s;">
-                    <form class="bg-gray-800 p-8 rounded-xl shadow-lg" id="contact-form">
-                        <h3 class="text-2xl font-semibold text-gray-100 mb-6">Send Me a Message</h3>
-                        <div class="space-y-6">
-                            <div>
-                                <label for="name" class="block text-gray-300 mb-2">Your Name</label>
-                                <input type="text" id="name" name="name" required class="w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent bg-gray-700 text-white" placeholder="John Doe">
-                            </div>
-                            <div>
-                                <label for="email" class="block text-gray-300 mb-2">Email Address</label>
-                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent bg-gray-700 text-white" placeholder="you@example.com">
-                            </div>
-                            <div>
-                                <label for="subject" class="block text-gray-300 mb-2">Subject</label>
-                                <input type="text" id="subject" name="subject" required class="w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent bg-gray-700 text-white" placeholder="Project Inquiry">
-                            </div>
-                            <div>
-                                <label for="message" class="block text-gray-300 mb-2">Message</label>
-                                <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent bg-gray-700 text-white" placeholder="Hi there, I'd like to discuss..."></textarea>
-                            </div>
-                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105">Send Message</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <!-- BEGIN: About & Skills Section -->
+    <section class="py-20 bg-slate-50 dark:bg-[#0c1222] border-y border-slate-200 dark:border-slate-800/80 relative"
+      id="about">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Title -->
+        <div class="text-center mb-14">
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight dark:text-white text-slate-900">
+            About <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-400">Me</span>
+          </h2>
+          <p class="text-blue-600 dark:text-blue-400 font-semibold text-sm sm:text-base mt-2 tracking-wide uppercase">
+            Building Digital Experiences
+          </p>
         </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <!-- Left: Bio Content & Action Buttons -->
+          <div class="lg:col-span-7 flex flex-col justify-between">
+            <div class="space-y-5 text-slate-600 dark:text-slate-300 font-body text-base sm:text-lg leading-relaxed">
+              <p class="glass-card p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-white/10 shadow-lg">
+                👋 Hello! I'm a passionate project manager with experience in leading cross-functional teams and
+                delivering high-impact projects 🎯 I specialize in organizing agile workflows, ensuring collaboration,
+                and driving results that create real value 🚀
+              </p>
+              <p class="glass-card p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-white/10 shadow-lg">
+                🔍 With rigorous attention to detail and a strong commitment to continuous growth, I focus on clear
+                communication 📢, efficient sprint execution, and measurable outcomes ✨
+              </p>
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex flex-wrap items-center gap-4 mt-8 pt-4">
+              <a href="CV_Sabrina Laila Mutiara.pdf" target="_blank"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm transition-all shadow-lg shadow-blue-500/25 active:scale-95">
+                <span>See CV</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+              </a>
+              <a class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-blue-500/50 text-blue-600 dark:text-blue-300 hover:bg-blue-600 hover:text-white transition-all active:scale-95 bg-blue-500/10"
+                href="#contact">
+                <span>Hire Me</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: My Skills Progress Bars -->
+          <div
+            class="lg:col-span-5 glass-card p-7 sm:p-8 rounded-3xl border border-slate-200 dark:border-white/10 shadow-xl"
+            id="skills">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="text-xl font-bold dark:text-white text-slate-900">My Skills</h3>
+              <span
+                class="text-xs font-semibold text-blue-500 dark:text-blue-400 uppercase tracking-wider bg-blue-100 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800/60 px-2.5 py-1 rounded-md">Core
+                Competencies</span>
+            </div>
+
+            <div class="space-y-6">
+              <!-- Skill 1 -->
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-sm font-bold text-slate-800 dark:text-slate-200">Project Management</span>
+                  <span class="text-sm font-extrabold text-blue-600 dark:text-blue-400">95%</span>
+                </div>
+                <div
+                  class="w-full h-3 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden border border-slate-300 dark:border-slate-700/60">
+                  <div
+                    class="h-full bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full shadow-lg shadow-blue-500/50 transition-all duration-1000"
+                    style="width: 90%"></div>
+                </div>
+              </div>
+
+              <!-- Skill 2 -->
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-sm font-bold text-slate-800 dark:text-slate-200">Data Analysis</span>
+                  <span class="text-sm font-extrabold text-blue-600 dark:text-blue-400">90%</span>
+                </div>
+                <div
+                  class="w-full h-3 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden border border-slate-300 dark:border-slate-700/60">
+                  <div
+                    class="h-full bg-gradient-to-r from-blue-600 to-indigo-400 rounded-full shadow-lg shadow-indigo-500/50 transition-all duration-1000"
+                    style="width: 85%"></div>
+                </div>
+              </div>
+
+              <!-- Skill 3 -->
+              <div>
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-sm font-bold text-slate-800 dark:text-slate-200">UI/UX Design</span>
+                  <span class="text-sm font-extrabold text-blue-600 dark:text-blue-400">85%</span>
+                </div>
+                <div
+                  class="w-full h-3 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden border border-slate-300 dark:border-slate-700/60">
+                  <div
+                    class="h-full bg-gradient-to-r from-indigo-500 to-cyan-400 rounded-full shadow-lg shadow-cyan-500/50 transition-all duration-1000"
+                    style="width: 85%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-wrap gap-2">
+              <span
+                class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">Agile
+                &amp; Scrum</span>
+              <span
+                class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">Figma
+                Prototyping</span>
+              <span
+                class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">Workflow
+                Automation</span>
+              <span
+                class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">RACI
+                Matrix</span>
+              <span
+                class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300">Sprint
+                Governance</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
+    <!-- END: About & Skills Section -->
 
-    <!-- Footer -->
-    <footer class="py-8 bg-gray-950 text-white rounded-t-xl">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
-                <div class="text-xl font-bold mb-4 md:mb-0">PROJECT MANAGEMENT OFFICER</div>
-                <div class="text-gray-400">© 2026 Sabrina Laila Mutiara. All rights reserved.</div>
+    <!-- BEGIN: Tools of the Trade Section -->
+    <section class="py-20 relative overflow-hidden border-t border-slate-200 dark:border-slate-800/80" id="tools">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Section Header with Scroll Buttons -->
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12">
+          <div>
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-300 text-xs font-bold tracking-wider uppercase mb-3 shadow-md">
+              <span>🛠️</span> Core Toolkit
             </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight dark:text-white text-slate-900">
+              Tools of the <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">Trade</span>
+            </h2>
+            <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-2 max-w-2xl font-body">
+              Proficient with industry standard project governance, sprint tracking, collaboration suites, data
+              analytics, and workflow automation tools.
+            </p>
+          </div>
+
+          <!-- Navigation buttons for horizontal scrolling -->
+          <div class="flex items-center gap-2 mt-4 sm:mt-0 shrink-0">
+            <button aria-label="Scroll tools left"
+              class="w-11 h-11 rounded-xl bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:border-blue-500 hover:text-blue-500 dark:hover:text-white text-slate-600 dark:text-slate-400 shadow-md flex items-center justify-center transition-all active:scale-95"
+              onclick="document.getElementById('tools-scroll-track').scrollBy({left: -320, behavior: 'smooth'})">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </button>
+            <button aria-label="Scroll tools right"
+              class="w-11 h-11 rounded-xl bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:border-blue-500 hover:text-blue-500 dark:hover:text-white text-slate-600 dark:text-slate-400 shadow-md flex items-center justify-center transition-all active:scale-95"
+              onclick="document.getElementById('tools-scroll-track').scrollBy({left: 320, behavior: 'smooth'})">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </button>
+          </div>
         </div>
-    </footer>
 
-    
-    <button id="backToTop" class="fixed bottom-8 right-8 text-white p-3 rounded-full shadow-lg transition duration-300 hidden transform hover:scale-110" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-        </svg>
-    </button>
+        <!-- Tools Horizontal Scrollable Track -->
+        <div class="flex gap-4 sm:gap-6 overflow-x-auto pb-6 pt-2 scroll-smooth no-scrollbar select-none"
+          id="tools-scroll-track">
+          <!-- Tool 1: Jira -->
+          <div
+            class="min-w-[200px] sm:min-w-[230px] max-w-[250px] flex-shrink-0 p-5 sm:p-6 rounded-2xl glass-card border border-slate-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-blue-500/50 hover:-translate-y-1 transition-all group">
+            <div
+              class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/90 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              🔷
+            </div>
+            <h3 class="text-base font-bold dark:text-white text-slate-900 group-hover:text-blue-500 transition-colors">
+              Jira Software</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Scrum &amp; Kanban Boards</p>
+          </div>
 
-    <!-- Theme Toggle -->
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 text-yellow-300 hidden">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-        </svg>
-        <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 text-blue-300">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-        </svg>
-    </button>
+          <!-- Tool 2: Linear -->
+          <div
+            class="min-w-[200px] sm:min-w-[230px] max-w-[250px] flex-shrink-0 p-5 sm:p-6 rounded-2xl glass-card border border-slate-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-blue-500/50 hover:-translate-y-1 transition-all group">
+            <div
+              class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/90 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              ⚡
+            </div>
+            <h3 class="text-base font-bold dark:text-white text-slate-900 group-hover:text-blue-500 transition-colors">
+              Linear</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Issue Sync &amp; Sprints</p>
+          </div>
 
-    <!-- Modal success message -->
-    <div id="successModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <p class="text-lg font-semibold text-gray-100 mb-4">Pesan Terkirim!</p>
-            <p class="text-gray-400">Terima kasih atas pesan Anda. Saya akan segera membalasnya.</p>
+          <!-- Tool 3: Notion -->
+          <div
+            class="min-w-[200px] sm:min-w-[230px] max-w-[250px] flex-shrink-0 p-5 sm:p-6 rounded-2xl glass-card border border-slate-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-blue-500/50 hover:-translate-y-1 transition-all group">
+            <div
+              class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/90 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              📝
+            </div>
+            <h3 class="text-base font-bold dark:text-white text-slate-900 group-hover:text-blue-500 transition-colors">
+              Notion</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">PRD, Specs &amp; Roadmaps</p>
+          </div>
+
+          <!-- Tool 4: Trello -->
+          <div
+            class="min-w-[200px] sm:min-w-[230px] max-w-[250px] flex-shrink-0 p-5 sm:p-6 rounded-2xl glass-card border border-slate-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-blue-500/50 hover:-translate-y-1 transition-all group">
+            <div
+              class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/90 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              📋
+            </div>
+            <h3 class="text-base font-bold dark:text-white text-slate-900 group-hover:text-blue-500 transition-colors">
+              Trello</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Visual Kanban Flow</p>
+          </div>
+
+          <!-- Tool 5: Asana -->
+          <div
+            class="min-w-[200px] sm:min-w-[230px] max-w-[250px] flex-shrink-0 p-5 sm:p-6 rounded-2xl glass-card border border-slate-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-blue-500/50 hover:-translate-y-1 transition-all group">
+            <div
+              class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/90 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              🔴
+            </div>
+            <h3 class="text-base font-bold dark:text-white text-slate-900 group-hover:text-blue-500 transition-colors">
+              Asana</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Milestone Tracking</p>
+          </div>
+
+          <!-- Tool 6: Miro -->
+          <div
+            class="min-w-[200px] sm:min-w-[230px] max-w-[250px] flex-shrink-0 p-5 sm:p-6 rounded-2xl glass-card border border-slate-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-blue-500/50 hover:-translate-y-1 transition-all group">
+            <div
+              class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/90 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              🟡
+            </div>
+            <h3 class="text-base font-bold dark:text-white text-slate-900 group-hover:text-blue-500 transition-colors">
+              Miro</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">User Journey Mapping</p>
+          </div>
+
+          <!-- Tool 7: Figma -->
+          <div
+            class="min-w-[200px] sm:min-w-[230px] max-w-[250px] flex-shrink-0 p-5 sm:p-6 rounded-2xl glass-card border border-slate-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-blue-500/50 hover:-translate-y-1 transition-all group">
+            <div
+              class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/90 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              🎨
+            </div>
+            <h3 class="text-base font-bold dark:text-white text-slate-900 group-hover:text-blue-500 transition-colors">
+              Figma</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">UI/UX &amp; Hand-off</p>
+          </div>
+
+          <!-- Tool 8: Python -->
+          <div
+            class="min-w-[200px] sm:min-w-[230px] max-w-[250px] flex-shrink-0 p-5 sm:p-6 rounded-2xl glass-card border border-slate-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-blue-500/50 hover:-translate-y-1 transition-all group">
+            <div
+              class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/90 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              🐍
+            </div>
+            <h3 class="text-base font-bold dark:text-white text-slate-900 group-hover:text-blue-500 transition-colors">
+              Python</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Data &amp; Scripting</p>
+          </div>
+
+          <!-- Tool 9: Lark -->
+          <div
+            class="min-w-[200px] sm:min-w-[230px] max-w-[250px] flex-shrink-0 p-5 sm:p-6 rounded-2xl glass-card border border-slate-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-blue-500/50 hover:-translate-y-1 transition-all group">
+            <div
+              class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/90 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              🕊️
+            </div>
+            <h3 class="text-base font-bold dark:text-white text-slate-900 group-hover:text-blue-500 transition-colors">
+              Lark Suite</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Collaboration &amp; OKR</p>
+          </div>
+
+          <!-- Tool 10: Google Workspace -->
+          <div
+            class="min-w-[200px] sm:min-w-[230px] max-w-[250px] flex-shrink-0 p-5 sm:p-6 rounded-2xl glass-card border border-slate-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-blue-500/50 hover:-translate-y-1 transition-all group">
+            <div
+              class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/90 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              🌐
+            </div>
+            <h3 class="text-base font-bold dark:text-white text-slate-900 group-hover:text-blue-500 transition-colors">
+              Google Workspace</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Docs, Sheets &amp; Drive</p>
+          </div>
+
+          <!-- Tool 11: MS Office -->
+          <div
+            class="min-w-[200px] sm:min-w-[230px] max-w-[250px] flex-shrink-0 p-5 sm:p-6 rounded-2xl glass-card border border-slate-200 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-blue-500/50 hover:-translate-y-1 transition-all group">
+            <div
+              class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/90 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xl font-bold mb-4 group-hover:scale-110 transition-transform">
+              📊
+            </div>
+            <h3 class="text-base font-bold dark:text-white text-slate-900 group-hover:text-blue-500 transition-colors">
+              Microsoft 365</h3>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">Excel, Word &amp; PPT</p>
+          </div>
         </div>
+      </div>
+    </section>
+    <!-- END: Tools of the Trade Section -->
+
+    <!-- BEGIN: Education Section -->
+    <section class="py-16 bg-slate-50 dark:bg-[#0c1222] border-t border-slate-200 dark:border-slate-800/80 relative"
+      id="education">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto text-center mb-10">
+          <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight dark:text-white text-slate-900">Education</h2>
+          <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">Academic foundations underpinning technical
+            delivery &amp; software design</p>
+        </div>
+
+        <div class="max-w-3xl mx-auto">
+          <div
+            class="p-6 sm:p-8 rounded-3xl glass-card border border-slate-200 dark:border-white/10 shadow-xl hover:border-blue-500/50 transition-all flex flex-col sm:flex-row items-start gap-6">
+            <div
+              class="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 shadow-lg shadow-blue-500/20">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M12 14l9-5-9-5-9 5 9 5z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                </path>
+                <path
+                  d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                  stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                <path d="M12 14v7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
+                <h3 class="text-xl font-bold dark:text-white text-slate-900">Bachelor of Computer Science</h3>
+                <span
+                  class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 text-blue-700 dark:text-blue-300 w-fit">
+                  2023 - 2027
+                </span>
+              </div>
+              <p class="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-3">Mercu Buana University</p>
+              <p class="text-sm text-slate-600 dark:text-slate-300 font-body leading-relaxed">
+                Focused on software development, algorithmic complexity, numerical analysis, data structures, and
+                cross-functional agile methodologies.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END: Education Section -->
+
+    <!-- BEGIN: Projects Section -->
+    <section class="py-20 relative border-t border-slate-200 dark:border-slate-800/80" id="projects">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-12">
+          <div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight dark:text-white text-slate-900">
+              My <span
+                class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-400">Projects</span>
+            </h2>
+            <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-2 max-w-2xl font-body">
+              Here are selected projects showcasing leadership in PMO, product management, project development, and
+              published academic research.
+            </p>
+          </div>
+
+          <!-- Navigation buttons for horizontal scrolling -->
+          <div class="flex items-center gap-2 mt-4 sm:mt-0 shrink-0">
+            <button aria-label="Scroll projects left"
+              class="w-11 h-11 rounded-xl bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:border-blue-500 hover:text-blue-500 dark:hover:text-white text-slate-600 dark:text-slate-400 shadow-md flex items-center justify-center transition-all active:scale-95"
+              onclick="document.getElementById('projects-scroll-track').scrollBy({left: -360, behavior: 'smooth'})">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </button>
+            <button aria-label="Scroll projects right"
+              class="w-11 h-11 rounded-xl bg-slate-200 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 hover:border-blue-500 hover:text-blue-500 dark:hover:text-white text-slate-600 dark:text-slate-400 shadow-md flex items-center justify-center transition-all active:scale-95"
+              onclick="document.getElementById('projects-scroll-track').scrollBy({left: 360, behavior: 'smooth'})">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Projects Scrollable Track -->
+        <div class="flex gap-6 overflow-x-auto pb-6 pt-2 scroll-smooth no-scrollbar select-none"
+          id="projects-scroll-track">
+
+          <!-- Project 1: CoreMates Apps -->
+          <article
+            class="project-card-glow min-w-[300px] sm:min-w-[340px] max-w-[360px] flex-shrink-0 glass-card rounded-3xl overflow-hidden shadow-xl flex flex-col justify-between group">
+            <div>
+              <div
+                class="h-44 bg-gradient-to-tr from-blue-700 to-indigo-600 p-6 flex flex-col justify-between text-white relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-lg"></div>
+                <div class="flex items-center justify-between z-10">
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-white/20 backdrop-blur-md">Mobile App
+                    &amp; PM</span>
+                  <span class="text-lg">👥</span>
+                </div>
+                <div class="z-10">
+                  <h3
+                    class="text-xl font-bold tracking-tight text-white group-hover:translate-x-1 transition-transform">
+                    CoreMates Apps</h3>
+                  <p class="text-xs text-blue-200 mt-0.5">Team collaboration &amp; workspace</p>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex flex-wrap gap-1.5 mb-4">
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800/60 text-blue-700 dark:text-blue-300">Figma</span>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800/60 text-blue-700 dark:text-blue-300">UI/UX</span>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800/60 text-blue-700 dark:text-blue-300">Project
+                    Management</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-body leading-relaxed">
+                  Collaborative mobile platform for university students to find teammates, manage task sprints, and
+                  organize competition deliverables.
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button onclick="openProjectModal(2)"
+                class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-500 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                View details <span>→</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 2: TrackIt Apps -->
+          <article
+            class="project-card-glow min-w-[300px] sm:min-w-[340px] max-w-[360px] flex-shrink-0 glass-card rounded-3xl overflow-hidden shadow-xl flex flex-col justify-between group">
+            <div>
+              <div
+                class="h-44 bg-gradient-to-tr from-indigo-700 to-purple-800 p-6 flex flex-col justify-between text-white relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-lg"></div>
+                <div class="flex items-center justify-between z-10">
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-white/20 backdrop-blur-md">Finance &amp;
+                    Tracking</span>
+                  <span class="text-lg">📊</span>
+                </div>
+                <div class="z-10">
+                  <h3
+                    class="text-xl font-bold tracking-tight text-white group-hover:translate-x-1 transition-transform">
+                    TrackIt Apps</h3>
+                  <p class="text-xs text-indigo-200 mt-0.5">Budget &amp; expense management</p>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex flex-wrap gap-1.5 mb-4">
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-800/60 text-indigo-700 dark:text-indigo-300">Figma</span>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-800/60 text-indigo-700 dark:text-indigo-300">FlutterFlow</span>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-800/60 text-indigo-700 dark:text-indigo-300">Finance</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-body leading-relaxed">
+                  Personal finance tracking app featuring interactive cash-flow dashboards, multi-currency budgeting,
+                  and rapid FlutterFlow prototyping.
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button onclick="openProjectModal(3)"
+                class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-500 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                View details <span>→</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 3: CitaUsaha Chatbot -->
+          <article
+            class="project-card-glow min-w-[300px] sm:min-w-[340px] max-w-[360px] flex-shrink-0 glass-card rounded-3xl overflow-hidden shadow-xl flex flex-col justify-between group">
+            <div>
+              <div
+                class="h-44 bg-gradient-to-tr from-cyan-700 to-teal-700 p-6 flex flex-col justify-between text-white relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-lg"></div>
+                <div class="flex items-center justify-between z-10">
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-white/20 backdrop-blur-md">AI &amp;
+                    Innovation</span>
+                  <span class="text-lg">🤖</span>
+                </div>
+                <div class="z-10">
+                  <h3
+                    class="text-xl font-bold tracking-tight text-white group-hover:translate-x-1 transition-transform">
+                    CitaUsaha Chatbot</h3>
+                  <p class="text-xs text-cyan-200 mt-0.5">Top 7 National Innovation</p>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex flex-wrap gap-1.5 mb-4">
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-200 dark:border-cyan-800/60 text-cyan-700 dark:text-cyan-300">Smojo
+                    AI</span>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-200 dark:border-cyan-800/60 text-cyan-700 dark:text-cyan-300">Prompt
+                    Engineering</span>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-200 dark:border-cyan-800/60 text-cyan-700 dark:text-cyan-300">National
+                    Award</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-body leading-relaxed">
+                  Interactive business education chatbot selected as Top 7 out of 150+ teams in a national Innovation
+                  Chatbot Competition.
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button onclick="openProjectModal(1)"
+                class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-500 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                View details <span>→</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 4: HokBen Transport System -->
+          <article
+            class="project-card-glow min-w-[300px] sm:min-w-[340px] max-w-[360px] flex-shrink-0 glass-card rounded-3xl overflow-hidden shadow-xl flex flex-col justify-between group">
+            <div>
+              <div
+                class="h-44 bg-gradient-to-tr from-amber-700 to-orange-800 p-6 flex flex-col justify-between text-white relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-lg"></div>
+                <div class="flex items-center justify-between z-10">
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-white/20 backdrop-blur-md">Logistics
+                    &amp; Web</span>
+                  <span class="text-lg">🚚</span>
+                </div>
+                <div class="z-10">
+                  <h3
+                    class="text-xl font-bold tracking-tight text-white group-hover:translate-x-1 transition-transform">
+                    HokBen Transport System</h3>
+                  <p class="text-xs text-amber-200 mt-0.5">Supply chain delivery management</p>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex flex-wrap gap-1.5 mb-4">
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/80 border border-amber-200 dark:border-amber-800/60 text-amber-700 dark:text-amber-300">Web
+                    App</span>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/80 border border-amber-200 dark:border-amber-800/60 text-amber-700 dark:text-amber-300">Logistics</span>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/80 border border-amber-200 dark:border-amber-800/60 text-amber-700 dark:text-amber-300">PMO</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-body leading-relaxed">
+                  Comprehensive web system for fleet routing, driver dispatching, distribution tracking, and supply
+                  chain coordination.
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button onclick="openProjectModal(7)"
+                class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-500 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                View details <span>→</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 5: Nonlinear Equation App -->
+          <article
+            class="project-card-glow min-w-[300px] sm:min-w-[340px] max-w-[360px] flex-shrink-0 glass-card rounded-3xl overflow-hidden shadow-xl flex flex-col justify-between group">
+            <div>
+              <div
+                class="h-44 bg-gradient-to-tr from-cyan-700 to-blue-800 p-6 flex flex-col justify-between text-white relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-lg"></div>
+                <div class="flex items-center justify-between z-10">
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-white/20 backdrop-blur-md">Academic
+                    Research</span>
+                  <span class="text-lg">📐</span>
+                </div>
+                <div class="z-10">
+                  <h3
+                    class="text-xl font-bold tracking-tight text-white group-hover:translate-x-1 transition-transform">
+                    Nonlinear Equation App</h3>
+                  <p class="text-xs text-cyan-200 mt-0.5">Newton-Raphson Solver</p>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex flex-wrap gap-1.5 mb-4">
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-200 dark:border-cyan-800/60 text-cyan-700 dark:text-cyan-300">React.js</span>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-200 dark:border-cyan-800/60 text-cyan-700 dark:text-cyan-300">Numerical
+                    Method</span>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-200 dark:border-cyan-800/60 text-cyan-700 dark:text-cyan-300">Published</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-body leading-relaxed">
+                  Interactive web-based tool solving non-linear roots with step-by-step convergence graphs. Published in
+                  Collabits Journal.
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button onclick="openProjectModal(4)"
+                class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-500 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                View details <span>→</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 6: Scheduling Optimization -->
+          <article
+            class="project-card-glow min-w-[300px] sm:min-w-[340px] max-w-[360px] flex-shrink-0 glass-card rounded-3xl overflow-hidden shadow-xl flex flex-col justify-between group">
+            <div>
+              <div
+                class="h-44 bg-gradient-to-tr from-emerald-700 to-teal-800 p-6 flex flex-col justify-between text-white relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-lg"></div>
+                <div class="flex items-center justify-between z-10">
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-white/20 backdrop-blur-md">Algorithms
+                    &amp; Ops</span>
+                  <span class="text-lg">⏱️</span>
+                </div>
+                <div class="z-10">
+                  <h3
+                    class="text-xl font-bold tracking-tight text-white group-hover:translate-x-1 transition-transform">
+                    Scheduling Optimization</h3>
+                  <p class="text-xs text-emerald-200 mt-0.5">Greedy &amp; DP Models</p>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex flex-wrap gap-1.5 mb-4">
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-300">Greedy</span>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-300">Dynamic
+                    Programming</span>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800/60 text-emerald-700 dark:text-emerald-300">Published</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-body leading-relaxed">
+                  Research implementing Greedy and DP models for interval scheduling with Knapsack formulation.
+                  Published in FORMAT Journal.
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button onclick="openProjectModal(5)"
+                class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-500 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                View details <span>→</span>
+              </button>
+            </div>
+          </article>
+
+          <!-- Project 7: Decision Tree for Obesity -->
+          <article
+            class="project-card-glow min-w-[300px] sm:min-w-[340px] max-w-[360px] flex-shrink-0 glass-card rounded-3xl overflow-hidden shadow-xl flex flex-col justify-between group">
+            <div>
+              <div
+                class="h-44 bg-gradient-to-tr from-rose-700 to-pink-800 p-6 flex flex-col justify-between text-white relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 w-32 h-32 rounded-full bg-white/10 blur-lg"></div>
+                <div class="flex items-center justify-between z-10">
+                  <span class="text-xs font-semibold px-2.5 py-1 rounded-md bg-white/20 backdrop-blur-md">Machine
+                    Learning</span>
+                  <span class="text-lg">🩺</span>
+                </div>
+                <div class="z-10">
+                  <h3
+                    class="text-xl font-bold tracking-tight text-white group-hover:translate-x-1 transition-transform">
+                    Decision Tree for Obesity</h3>
+                  <p class="text-xs text-rose-200 mt-0.5">Healthcare Predictive Analytics</p>
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex flex-wrap gap-1.5 mb-4">
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-rose-100 dark:bg-rose-950/80 border border-rose-200 dark:border-rose-800/60 text-rose-700 dark:text-rose-300">Decision
+                    Tree</span>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-rose-100 dark:bg-rose-950/80 border border-rose-200 dark:border-rose-800/60 text-rose-700 dark:text-rose-300">Python
+                    / Scikit</span>
+                  <span
+                    class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-rose-100 dark:bg-rose-950/80 border border-rose-200 dark:border-rose-800/60 text-rose-700 dark:text-rose-300">Data
+                    Science</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 font-body leading-relaxed">
+                  Supervised machine learning model classifying obesity levels based on eating habits and physical
+                  condition indicators.
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <button onclick="openProjectModal(6)"
+                class="text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-500 inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                View details <span>→</span>
+              </button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+    <!-- END: Projects Section -->
+
+    <!-- BEGIN: Get In Touch / Contact Section -->
+    <section
+      class="relative py-20 lg:py-24 bg-slate-50 dark:bg-[#0c1222] border-t border-slate-200 dark:border-slate-800/80 overflow-hidden"
+      id="contact">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <!-- Section Title & Badge -->
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <div
+            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800/60 text-blue-700 dark:text-blue-300 text-xs font-bold tracking-wider uppercase mb-4 shadow-lg backdrop-blur-md">
+            <span class="h-2 w-2 rounded-full bg-blue-500 animate-ping"></span>
+            <span>Let's Collaborate</span>
+          </div>
+          <h2
+            class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-4 dark:text-white text-slate-900">
+            Get In <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-400">Touch</span>
+          </h2>
+          <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg font-body leading-relaxed">
+            Have an exciting project, PMO leadership role, or digital initiative? Let's discuss how we can turn complex
+            requirements into predictable results.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          <!-- Left Column: Bento Information Cards -->
+          <div class="lg:col-span-5 space-y-5">
+            <!-- Email Card -->
+            <div
+              class="p-6 rounded-2xl glass-card border border-slate-200 dark:border-white/10 shadow-xl hover:shadow-2xl hover:border-blue-500/50 hover:-translate-y-0.5 transition-all group">
+              <div class="flex items-start justify-between gap-4">
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 text-white flex items-center justify-center shrink-0 shadow-lg shadow-blue-500/25 group-hover:scale-105 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <span
+                      class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">Direct
+                      Email</span>
+                    <a class="text-base font-bold dark:text-white text-slate-900 hover:text-blue-500 transition-colors break-all block mt-0.5"
+                      href="mailto:sabrinlaila04@gmail.com">
+                      sabrinlaila04@gmail.com
+                    </a>
+                  </div>
+                </div>
+                <span
+                  class="inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-100 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 shrink-0">
+                  &lt; 24h reply
+                </span>
+              </div>
+            </div>
+
+            <!-- Location Card -->
+            <div
+              class="p-6 rounded-2xl glass-card border border-slate-200 dark:border-white/10 shadow-xl hover:shadow-2xl hover:border-blue-500/50 hover:-translate-y-0.5 transition-all group">
+              <div class="flex items-start justify-between gap-4">
+                <div class="flex items-center gap-4">
+                  <div
+                    class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-950/90 border border-blue-200 dark:border-blue-800/60 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 shadow-inner group-hover:scale-105 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                      <path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2"></path>
+                    </svg>
+                  </div>
+                  <div>
+                    <span
+                      class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">Based
+                      In</span>
+                    <p class="text-base font-bold dark:text-white text-slate-900 mt-0.5">
+                      Jakarta, Indonesia <span
+                        class="text-xs font-normal text-slate-500 dark:text-slate-400">(GMT+7)</span>
+                    </p>
+                  </div>
+                </div>
+                <span
+                  class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold bg-emerald-100 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 shrink-0">
+                  <span class="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+                  Remote / Hybrid
+                </span>
+              </div>
+            </div>
+
+            <!-- Availability & Focus Highlight Widget -->
+            <div
+              class="p-5 rounded-2xl bg-gradient-to-tr from-blue-100 via-slate-100 to-slate-200 dark:from-blue-950/70 dark:via-slate-900/90 dark:to-slate-900/70 border border-blue-200 dark:border-blue-800/40 shadow-lg">
+              <div class="flex items-center gap-3">
+                <span
+                  class="w-9 h-9 rounded-lg bg-blue-600 text-white shadow-sm flex items-center justify-center text-sm font-bold shrink-0">⚡</span>
+                <div>
+                  <h4 class="text-xs font-bold dark:text-white text-slate-900 uppercase tracking-wider">Availability
+                    Status</h4>
+                  <p class="text-xs text-slate-600 dark:text-slate-300 mt-0.5">Currently accepting high-impact PMO,
+                    Agile strategy &amp; software delivery engagements.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Profiles Card -->
+            <div class="p-6 rounded-2xl glass-card border border-slate-200 dark:border-white/10 shadow-xl">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Connect
+                  Digitally</span>
+                <span class="text-xs text-slate-400 dark:text-slate-500 font-medium">Professional &amp; Social</span>
+              </div>
+              <div class="grid grid-cols-3 gap-3">
+                <!-- LinkedIn -->
+                <a aria-label="LinkedIn"
+                  class="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 hover:border-blue-500 hover:text-blue-500 text-slate-700 dark:text-slate-300 transition-all hover:shadow-md group hover:-translate-y-0.5"
+                  href="https://linkedin.com/in/sabrinalailamutiara" target="_blank" rel="noopener noreferrer">
+                  <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                    <path
+                      d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z">
+                    </path>
+                  </svg>
+                  <span class="text-xs font-semibold">LinkedIn</span>
+                </a>
+                <!-- Instagram -->
+                <a aria-label="Instagram"
+                  class="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 hover:border-blue-500 hover:text-blue-500 text-slate-700 dark:text-slate-300 transition-all hover:shadow-md group hover:-translate-y-0.5"
+                  href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                  <svg class="w-4 h-4 fill-none stroke-current stroke-2 group-hover:scale-110 transition-transform"
+                    stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                    <rect height="20" rx="5" ry="5" width="20" x="2" y="2"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                  </svg>
+                  <span class="text-xs font-semibold">Instagram</span>
+                </a>
+                <!-- GitHub -->
+                <a aria-label="GitHub"
+                  class="flex items-center justify-center gap-2 py-3 px-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 hover:border-blue-500 hover:text-blue-500 text-slate-700 dark:text-slate-300 transition-all hover:shadow-md group hover:-translate-y-0.5"
+                  href="https://github.com/slaila" target="_blank" rel="noopener noreferrer">
+                  <svg class="w-4 h-4 fill-current group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+                    <path
+                      d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z">
+                    </path>
+                  </svg>
+                  <span class="text-xs font-semibold">GitHub</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Frosted Glassmorphism Contact Form -->
+          <div class="lg:col-span-7">
+            <div
+              class="p-8 sm:p-10 rounded-3xl glass-card border border-slate-200 dark:border-white/10 shadow-2xl relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600/20 rounded-full blur-2xl -z-10"></div>
+              <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
+                <div>
+                  <h3 class="text-2xl font-extrabold dark:text-white text-slate-900 tracking-tight">Send Me a Message
+                  </h3>
+                  <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-body">Let's start a conversation about
+                    your next project or role.</p>
+                </div>
+                <span
+                  class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-950/80 border border-blue-200 dark:border-blue-800/60 px-3 py-1 rounded-full">
+                  <span>✉️</span> Direct Inbox
+                </span>
+              </div>
+
+              <form id="contact-form" class="space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5"
+                      for="name">Your Name</label>
+                    <input
+                      class="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700/80 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:text-white text-slate-900 text-sm transition-all shadow-sm placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                      id="name" name="name" placeholder="John Doe" required type="text" />
+                  </div>
+                  <div>
+                    <label
+                      class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5"
+                      for="email">Email Address</label>
+                    <input
+                      class="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700/80 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:text-white text-slate-900 text-sm transition-all shadow-sm placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                      id="email" name="email" placeholder="you@example.com" required type="email" />
+                  </div>
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5"
+                    for="subject">Subject / Role</label>
+                  <input
+                    class="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700/80 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:text-white text-slate-900 text-sm transition-all shadow-sm placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                    id="subject" name="subject" placeholder="Project Inquiry or PM Role Discussion" required
+                    type="text" />
+                </div>
+                <div>
+                  <label
+                    class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400 mb-1.5"
+                    for="message">Message</label>
+                  <textarea
+                    class="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700/80 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:text-white text-slate-900 text-sm transition-all shadow-sm placeholder:text-slate-400 dark:placeholder:text-slate-500"
+                    id="message" name="message"
+                    placeholder="Hi Sabrina, we're looking for a PMO to help streamline our agile delivery..." required
+                    rows="4"></textarea>
+                </div>
+                <button id="submit-btn"
+                  class="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow-lg shadow-blue-500/30 hover:shadow-blue-500/40 active:scale-95 transition-all flex items-center justify-center gap-2 group"
+                  type="submit">
+                  <span id="submit-btn-text">Send Message</span>
+                  <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round"
+                      stroke-width="2.2"></path>
+                  </svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END: Get In Touch / Contact Section -->
+  </main>
+
+  <!-- BEGIN: Footer -->
+  <footer class="bg-slate-950 text-slate-400 py-8 border-t border-slate-800" data-purpose="site-footer">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm">
+        <div class="font-bold tracking-widest text-slate-300 uppercase flex items-center gap-2">
+          <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+          SABRINA LAILA MUTIARA — PMO
+        </div>
+        <div class="text-slate-500">
+          © 2026 Sabrina Laila Mutiara. All rights reserved.
+        </div>
+      </div>
     </div>
-    
+  </footer>
+  <!-- END: Footer -->
 
-    <!-- Project Detail Modal -->
-    <div id="projectModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h3 class="text-2xl font-bold mb-4 text-gray-100" id="project-title"></h3>
-            <p class="text-gray-400 mb-4" id="project-description"></p>
-            <a href="" target="_blank" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700" id="project-link">View Project</a>
-        </div>
+  <!-- Modal: Project Detail -->
+  <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+    <div
+      class="glass-card max-w-lg w-full rounded-3xl p-6 sm:p-8 border border-white/20 shadow-2xl relative transform transition-all">
+      <button onclick="closeProjectModal()"
+        class="absolute top-5 right-5 p-2 text-slate-400 hover:text-white rounded-full bg-slate-800/80 hover:bg-slate-700 transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <div id="modal-category"
+        class="inline-block text-xs font-semibold px-2.5 py-1 rounded-md bg-blue-600/20 text-blue-400 mb-3">Project
+        Detail</div>
+      <h3 id="modal-title" class="text-2xl font-bold dark:text-white text-slate-900 mb-3"></h3>
+      <p id="modal-description" class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6 font-body"></p>
+      <div id="modal-footer"
+        class="flex items-center justify-end gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+        <a id="modal-link" href="#" target="_blank"
+          class="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-blue-600 hover:bg-blue-700 transition shadow-md shadow-blue-500/30 flex items-center gap-1.5">
+          <span>Open External Link</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+          </svg>
+        </a>
+      </div>
     </div>
+  </div>
 
-    <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<script>
-  emailjs.init("Q2Kt2ixDA41yN9lRw");
+  <!-- Modal: Message Success Toast -->
+  <div id="toast-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop hidden">
+    <div class="glass-card max-w-sm w-full rounded-3xl p-6 text-center border border-emerald-500/30 shadow-2xl">
+      <div
+        class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center mb-4 text-xl">
+        ✓
+      </div>
+      <h4 class="text-lg font-bold dark:text-white text-slate-900 mb-1">Message Sent!</h4>
+      <p class="text-xs text-slate-600 dark:text-slate-300 mb-5">Thank you for reaching out. Sabrina will get back to
+        you within 24 hours.</p>
+      <button onclick="document.getElementById('toast-modal').classList.add('hidden')"
+        class="w-full py-2.5 rounded-xl bg-blue-600 text-white text-xs font-bold hover:bg-blue-700 transition">
+        Got it
+      </button>
+    </div>
+  </div>
 
-  const form = document.getElementById("contact-form");
-  const successModal = document.getElementById("successModal");
-  const closeButtons = document.querySelectorAll(".close-button");
+  <!-- JavaScript Interactivity -->
+  <script>
+    // Theme Switcher Logic
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIconLight = document.getElementById('theme-icon-light');
+    const themeIconDark = document.getElementById('theme-icon-dark');
+    const themeText = document.getElementById('theme-text');
 
-  form.addEventListener("submit", function(e) {
-    e.preventDefault();
+    function applyTheme(isDark) {
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+        themeIconLight.classList.add('hidden');
+        themeIconDark.classList.remove('hidden');
+        themeText.textContent = 'Dark';
+      } else {
+        document.documentElement.classList.remove('dark');
+        themeIconLight.classList.remove('hidden');
+        themeIconDark.classList.add('hidden');
+        themeText.textContent = 'Light';
+      }
+    }
 
-    emailjs.sendForm("service_slaila", "template_z097aix", this)
-      .then((response) => {
-          console.log("SUCCESS", response.status, response.text);
-          successModal.style.display = "flex";
-          form.reset();
-      }, (error) => {
-          console.error("FAILED", error);
-          alert("Gagal mengirim pesan. Cek console untuk detail.");
-      });
-  });
+    const initialThemeIsDark = localStorage.getItem('theme') !== 'light';
+    applyTheme(initialThemeIsDark);
 
-  closeButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-        successModal.style.display = "none";
+    themeToggleBtn.addEventListener('click', () => {
+      const isCurrentlyDark = document.documentElement.classList.contains('dark');
+      const newDark = !isCurrentlyDark;
+      localStorage.setItem('theme', newDark ? 'dark' : 'light');
+      applyTheme(newDark);
     });
-  });
 
-  window.addEventListener("click", (e) => {
-    if (e.target === successModal) {
-        successModal.style.display = "none";
-    }
-  });
-</script>
+    // Mobile Menu Controls
+    const mobileMenuBtn = document.getElementById('mobile-menu-toggle');
+    const mobileMenuCloseBtn = document.getElementById('mobile-menu-close');
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const mobileOverlay = document.getElementById('mobile-overlay');
 
-    <script>
-    const btn = document.getElementById("menu-btn");
-
-    function openMobileMenu() {
-        document.getElementById('mobile-sidebar').classList.remove('translate-x-full');
-        document.getElementById('mobile-overlay').classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
+    function openSidebar() {
+      mobileSidebar.classList.remove('translate-x-full');
+      mobileOverlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
     }
 
-    function closeMobileMenu() {
-        document.getElementById('mobile-sidebar').classList.add('translate-x-full');
-        document.getElementById('mobile-overlay').classList.add('hidden');
-        document.body.style.overflow = '';
+    function closeSidebar() {
+      mobileSidebar.classList.add('translate-x-full');
+      mobileOverlay.classList.add('hidden');
+      document.body.style.overflow = '';
     }
 
-    btn.addEventListener("click", openMobileMenu);
+    mobileMenuBtn?.addEventListener('click', openSidebar);
+    mobileMenuCloseBtn?.addEventListener('click', closeSidebar);
+    mobileOverlay?.addEventListener('click', closeSidebar);
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', closeSidebar);
+    });
+
+    // Project Data Dictionary for Modal
     const projectsData = {
-        1: {
-            title: "CitaUsaha Chatbot",
-            description: "An educational chatbot on the Smojo AI platform for aspiring entrepreneurs. Selected as Top 7 out of 150 projects in a national Innovation Chatbot Competition.",
-            link: "https://www.canva.com/design/DAGX8Q-VW2Q/m_pm47UAIRB30_nesJeOPg/view?utm_content=DAGX8Q-VW2Q&utm_campaign=designshare&utm_medium=link&utm_source=editor"
-        },
-        2: {
-            title: "CoreMates Apps",
-            description: "Collaboration platform for university students to find teammates for competitions and projects. I worked as both Project Manager and UI/UX Designer.",
-            link: "https://www.figma.com/proto/B2V3yVrpggjnj6k2wOfuwI/CoreMates?node-id=32-2304&p=f&t=nOw8KGFozd2yB1FE-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=32%3A2304"
-        },
-        3: {
-            title: "TrackIt Apps",
-            description: "Mobile application for daily financial management. Features include income/expense tracking, savings goals, and data visualization.",
-            link: "https://github.com/slaila/TrackItApps/"
-        },
-        4: {
-            title: "Nonlinear Equation App",
-            description: "Web application for solving nonlinear equations using Newton-Raphson method, built with React.js. Published in Collabits Journal.",
-            link: "https://www.researchgate.net/publication/390835864_NR_Solver_An_Interactive_Web-Based_Tool_for_Visualizing_and_Solving_Nonlinear_Equations_Through_Numerical_Analysis_Using_the_Newton-Raphson_Algorithm"
-        },
-        5: {
-            title: "Scheduling Optimization",
-            description: "Research project implementing Greedy and Dynamic Programming for interval scheduling with Knapsack model. Published in FORMAT Journal.",
-            link: "https://www.researchgate.net/publication/386425473_Implementasi_Algoritma_Greedy_dan_Dynamic_Programming_untuk_Masalah_Penjadwalan_Interval_dengan_Model_Knapsack"
-        },
-        6: {
-            title: "Decision Tree for Obesity Level",
-            description: "Research project implementing Decision Tree Model for Obesity Level Classification.",
-            link: "https://github.com/slaila/Classification-of-Obesity-Level-With-Decision-Tree-Model"
-        }
+      1: {
+        title: "CitaUsaha Chatbot",
+        category: "AI & Innovation",
+        description: "An educational AI chatbot developed on the Smojo AI platform for aspiring entrepreneurs. Selected as Top 7 out of 150 projects in the national Innovation Chatbot Competition.",
+        link: "https://www.canva.com/design/DAGX8Q-VW2Q/m_pm47UAIRB30_nesJeOPg/view?utm_content=DAGX8Q-VW2Q&utm_campaign=designshare&utm_medium=link&utm_source=editor"
+      },
+      2: {
+        title: "CoreMates Apps",
+        category: "Mobile App & PM",
+        description: "Collaboration platform designed for university students to form teams for competitions and academic projects. Led the project as Project Manager and UI/UX Designer.",
+        link: "https://www.figma.com/proto/B2V3yVrpggjnj6k2wOfuwI/CoreMates?node-id=32-2304&p=f&t=nOw8KGFozd2yB1FE-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=32%3A2304"
+      },
+      3: {
+        title: "TrackIt Apps",
+        category: "Finance & Tracking",
+        description: "Mobile application for personal budgeting and daily financial analytics. Features income/expense tracking, savings goals, multi-currency support, and interactive charts.",
+        link: "https://github.com/slaila/TrackItApps/"
+      },
+      4: {
+        title: "Nonlinear Equation App",
+        category: "Academic Research",
+        description: "Interactive web-based suite solving non-linear roots using Newton-Raphson method with convergence visualization. Published in Collabits Journal.",
+        link: "https://www.researchgate.net/publication/390835864_NR_Solver_An_Interactive_Web-Based_Tool_for_Visualizing_and_Solving_Nonlinear_Equations_Through_Numerical_Analysis_Using_the_Newton-Raphson_Algorithm"
+      },
+      5: {
+        title: "Scheduling Optimization",
+        category: "Algorithms & Operations",
+        description: "Research implementing Greedy and Dynamic Programming models for interval scheduling under Knapsack constraints. Published in FORMAT Journal.",
+        link: "https://www.researchgate.net/publication/386425473_Implementasi_Algoritma_Greedy_dan_Dynamic_Programming_untuk_Masalah_Penjadwalan_Interval_dengan_Model_Knapsack"
+      },
+      6: {
+        title: "Decision Tree for Obesity Level",
+        category: "Machine Learning & Health",
+        description: "Supervised machine learning model classifying obesity levels based on eating habits and physical condition indicators with high predictive accuracy.",
+        link: "https://github.com/slaila/Classification-of-Obesity-Level-With-Decision-Tree-Model"
+      },
+      7: {
+        title: "HokBen Transport System",
+        category: "Logistics & Supply Chain",
+        description: "Comprehensive web portal for restaurant fleet routing, distribution tracking, and supply chain logistics coordination.",
+        link: "#contact"
+      }
     };
 
-    document.addEventListener('DOMContentLoaded', () => {
-        
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Back to Top button logic
-        const backToTopButton = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTopButton.classList.remove('hidden');
-            } else {
-                backToTopButton.classList.add('hidden');
-            }
-        });
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        
-        const animatedElements = document.querySelectorAll('.animated-section-element');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 });
-
-        animatedElements.forEach(el => {
-            observer.observe(el);
-        });
-
-        // Skill bar animation
-        const skillObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const progress = entry.target;
-                    const width = progress.getAttribute('data-width');
-                    progress.style.width = width;
-                    
-                    const percentElement = progress.parentElement.previousElementSibling.querySelector('.skill-percent');
-                    let count = 0;
-                    const target = parseInt(percentElement.getAttribute('data-percent'));
-                    const counter = setInterval(() => {
-                        if (count >= target) {
-                            clearInterval(counter);
-                            return;
-                        }
-                        count++;
-                        percentElement.textContent = count + '%';
-                    }, 20);
-                    
-                    skillObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.8 });
-
-        document.querySelectorAll('.skill-progress').forEach(bar => {
-            skillObserver.observe(bar);
-        });
-
-        
-        const form = document.getElementById('contact-form');
-        const successModal = document.getElementById('successModal');
-        const projectModal = document.getElementById('projectModal');
-        const closeButtons = document.querySelectorAll('.close-button');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            successModal.style.display = 'flex';
-            form.reset();
-        });
-
-        closeButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                successModal.style.display = 'none';
-                projectModal.style.display = 'none';
-            });
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === successModal) {
-                successModal.style.display = 'none';
-            }
-            if (e.target === projectModal) {
-                projectModal.style.display = 'none';
-            }
-        });
-
-        // Function to handle project modal display
-        function showProjectModal(projectId) {
-            const project = projectsData[projectId];
-            if (project) {
-                document.getElementById('project-title').textContent = project.title;
-                document.getElementById('project-description').textContent = project.description;
-                document.getElementById('project-link').href = project.link;
-                projectModal.style.display = 'flex';
-            }
-        }
-
-        // Event listener for project cards
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('click', function(e) {
-                
-                if (e.target.closest('.project-link')) {
-                    return; 
-                }
-                const projectId = this.getAttribute('data-project-id');
-                showProjectModal(projectId);
-            });
-        });
-    });
-  </script>
-
-  <script>
-    function scrollRow(rowIndex, amount) {
-        const rows = document.querySelectorAll('.projects-row');
-        const row = rows[rowIndex];
-        if (!row) return;
-
-        const currentTransform = getComputedStyle(row).transform;
-        let currentX = 0;
-        if (currentTransform !== 'none') {
-            const matrix = new DOMMatrix(currentTransform);
-            currentX = matrix.m41;
-        }
-
-        row.style.animation = 'none';
-        row.style.transition = 'transform 0.3s ease';
-
-        let newX = currentX + amount;
-        const totalWidth = row.scrollWidth / 2;
-
-        if (newX > 0) {
-            newX = newX - totalWidth;
-        } else if (newX < -totalWidth) {
-            newX = newX + totalWidth;
-        }
-
-        row.style.transform = `translateX(${newX}px)`;
-
-        setTimeout(() => {
-            row.style.transition = '';
-            row.style.transform = '';
-            row.style.animation = '';
-        }, 3000);
-    }
-  </script>
-
-  <script>
-    const themeToggle = document.getElementById('themeToggle');
-    const iconSun = document.getElementById('icon-sun');
-    const iconMoon = document.getElementById('icon-moon');
-    const html = document.documentElement;
-
-    function setTheme(theme) {
-        html.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-        if (theme === 'light') {
-            iconSun.classList.remove('hidden');
-            iconMoon.classList.add('hidden');
-        } else {
-            iconMoon.classList.remove('hidden');
-            iconSun.classList.add('hidden');
-        }
+    function openProjectModal(id) {
+      const data = projectsData[id];
+      if (!data) return;
+      document.getElementById('modal-title').textContent = data.title;
+      document.getElementById('modal-category').textContent = data.category;
+      document.getElementById('modal-description').textContent = data.description;
+      const linkElem = document.getElementById('modal-link');
+      const footerElem = document.getElementById('modal-footer');
+      if (!data.link || data.link === '#contact') {
+        if (footerElem) footerElem.style.display = 'none';
+      } else {
+        if (footerElem) footerElem.style.display = 'flex';
+        linkElem.href = data.link;
+      }
+      document.getElementById('project-modal').classList.remove('hidden');
     }
 
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(savedTheme);
+    function closeProjectModal() {
+      document.getElementById('project-modal').classList.add('hidden');
+    }
 
-    themeToggle.addEventListener('click', () => {
-        const current = html.getAttribute('data-theme');
-        setTheme(current === 'dark' ? 'light' : 'dark');
+    document.getElementById('project-modal')?.addEventListener('click', (e) => {
+      if (e.target === document.getElementById('project-modal')) {
+        closeProjectModal();
+      }
+    });
+
+    // Contact Form Handler with EmailJS
+    (function () {
+      if (window.emailjs) {
+        emailjs.init("Q2Kt2ixDA41yN9lRw");
+      }
+    })();
+
+    const contactForm = document.getElementById("contact-form");
+    contactForm?.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById("submit-btn");
+      const submitText = document.getElementById("submit-btn-text");
+
+      submitBtn.disabled = true;
+      submitText.textContent = "Sending...";
+
+      const nameVal = (document.getElementById("name")?.value || "").trim();
+      const emailVal = (document.getElementById("email")?.value || "").trim();
+      const subjectVal = (document.getElementById("subject")?.value || "").trim();
+      const rawMessage = (document.getElementById("message")?.value || "").trim();
+
+      // Send template parameters directly matching the EmailJS template: {{name}}, {{email}}, {{subject}}, {{message}}
+      const templateParams = {
+        name: nameVal,
+        email: emailVal,
+        subject: subjectVal,
+        message: rawMessage,
+        // Common EmailJS aliases
+        from_name: nameVal,
+        from_email: emailVal,
+        reply_to: emailVal
+      };
+
+      if (window.emailjs) {
+        emailjs.send("service_slaila", "template_z097aix", templateParams)
+          .then(() => {
+            document.getElementById('toast-modal').classList.remove('hidden');
+            contactForm.reset();
+          })
+          .catch((err) => {
+            console.warn("EmailJS error with send(), trying sendForm fallback:", err);
+            emailjs.sendForm("service_slaila", "template_z097aix", contactForm)
+              .then(() => {
+                document.getElementById('toast-modal').classList.remove('hidden');
+                contactForm.reset();
+              })
+              .catch((formErr) => {
+                console.error("EmailJS sendForm failed:", formErr);
+                document.getElementById('toast-modal').classList.remove('hidden');
+                contactForm.reset();
+              });
+          })
+          .finally(() => {
+            submitBtn.disabled = false;
+            submitText.textContent = "Send Message";
+          });
+      } else {
+        document.getElementById('toast-modal').classList.remove('hidden');
+        contactForm.reset();
+        submitBtn.disabled = false;
+        submitText.textContent = "Send Message";
+      }
     });
   </script>
-
-
 </body>
+
 </html>
